@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اسامة زيد ذياب - مطور ويب ومصمم UI/UX</title>
+    <meta name="description" content="محفظة أعمال اسامة زيد ذياب - مطور ويب ومصمم UI/UX محترف مع خبرة 5+ سنوات">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="logo-circle">
+                    <i class="fas fa-code"></i>
+                </div>
+            </div>
+            <div class="loading-text">
+                <h2>اسامة زيد</h2>
+                <p>جاري التحميل...</p>
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-logo">
+                    <i class="fas fa-code"></i>
+                    <span>اسامة زيد ذياب</span>
+                </div>
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#hero" class="nav-link active">الرئيسية</a></li>
+                <li><a href="#about" class="nav-link">نبذة</a></li>
+                <li><a href="#skills" class="nav-link">المهارات</a></li>
+                <li><a href="#experience" class="nav-link">الخبرة</a></li>
+                <li><a href="#projects" class="nav-link">المشاريع</a></li>
+                <li><a href="#services" class="nav-link">الخدمات</a></li>
+                <li><a href="#contact" class="nav-link">تواصل معي</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="nav-toggle" id="navToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero-section">
+            <div class="hero-background">
+                <div class="hero-shapes">
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <div class="hero-greeting">مرحباً، أنا</div>
+                        <h1 class="hero-name">اسامة زيد ذياب</h1>
+                        <div class="hero-title">
+                            <span class="typing-text" id="typingText"></span>
+                            <span class="cursor">|</span>
+                        </div>
+                        <p class="hero-description">
+                            أبني تجارب رقمية استثنائية تجمع بين الجمال والوظيفة، مع خبرة 5+ سنوات في تطوير المواقع والتطبيقات المبتكرة
+                        </p>
+                        
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" data-count="2">0</div>
+                                <div class="stat-label">سنوات خبرة</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-count="2">0</div>
+                                <div class="stat-label">مشروع مكتمل</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-count="3">0</div>
+                                <div class="stat-label">عميل راضي</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" data-count="0">0</div>
+                                <div class="stat-label">جائزة حصلت عليها</div>
+                            </div>
+                        </div>
+                        
+                        <div class="hero-actions">
+                            <a href="#projects" class="btn btn--primary">
+                                <i class="fas fa-folder-open"></i>
+                                استكشف أعمالي
+                            </a>
+                            <a href="#contact" class="btn btn--secondary">
+                                <i class="fas fa-envelope"></i>
+                                تواصل معي
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-image">
+                        <div class="image-container">
+                            <img
+                                src="https://everpic-plus.preview.emergentagent.com/api/f/6pLymwY0"
+                                srcset="https://everpic-plus.preview.emergentagent.com/api/f/6pLymwY0?w=320 320w, https://everpic-plus.preview.emergentagent.com/api/f/6pLymwY0?w=480 480w, https://everpic-plus.preview.emergentagent.com/api/f/6pLymwY0?w=768 768w, https://everpic-plus.preview.emergentagent.com/api/f/6pLymwY0?w=1024 1024w"
+                                sizes="(max-width: 480px) 70vw, (max-width: 768px) 45vw, 400px"
+                                alt="اسامة زيد ذياب"
+                                class="profile-image"
+                                decoding="async"
+                                loading="eager"
+                            >
+                            <div class="image-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">تعرف علي</span>
+                    <h2 class="section-title">نبذة عني</h2>
+                    <p class="section-subtitle">قصتي مع عالم التطوير والتصميم</p>
+                </div>
+                
+                <div class="about-content">
+                    <div class="about-text">
+                        <p class="about-intro">
+                            مطور ومبرمج مع خبرة في إنشاء حلول تقنية متكاملة ومشاريع تعتمد على الذكاء الاصطناعي وتحليل البيانات. أتخصص في تطوير الأنظمة الذكية وتحسين الأداء الوظيفي للتطبيقات والبرمجيات لتقديم تجربة استخدام سلسة وفعّالة.
+                        </p>
+                        <p>
+                            أؤمن بأن البرمجة ليست مجرد كود، بل طريقة لتحويل الأفكار إلى حلول عملية وواقعية. أسعى دائماً لتقديم مشاريع وحلول تقنية تلبي الاحتياجات الحقيقية وتضيف قيمة ملموسة، من خلال الجمع بين الفهم العميق للتقنية والتطبيق العملي.
+                        </p>
+                        
+                        <div class="about-info">
+                            <div class="info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>العراق، صلاح الدين</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>zaiddzaid666@gmail.com</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-phone"></i>
+                                <span>078********</span>
+                            </div>
+                            <div class="info-item">
+                                <i class="fas fa-globe"></i>
+                                <span>www.osama-zaid-dhiab.com</span>
+                            </div>
+                        </div>
+                        
+                        <div class="about-actions">
+                            <a href="#contact" class="btn btn--primary">
+                                <i class="fas fa-download"></i>
+                                تحميل السيرة الذاتية
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="about-image">
+                        <div class="image-frame">
+                            <img
+                                src="https://everpic-plus.preview.emergentagent.com/api/f/6pLymwY0"
+                                srcset="https://everpic-plus.preview.emergentagent.com/api/f/6pLymwY0?w=320 320w, https://everpic-plus.preview.emergentagent.com/api/f/6pLymwY0?w=480 480w, https://everpic-plus.preview.emergentagent.com/api/f/6pLymwY0?w=768 768w, https://everpic-plus.preview.emergentagent.com/api/f/6pLymwY0?w=1024 1024w"
+                                sizes="(max-width: 480px) 90vw, (max-width: 1024px) 50vw, 500px"
+                                alt="اسامة زيد ذياب في العمل"
+                                decoding="async"
+                                loading="lazy"
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="skills-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">قدراتي</span>
+                    <h2 class="section-title">المهارات التقنية</h2>
+                    <p class="section-subtitle">التقنيات التي أتقنها وأستخدمها في مشاريعي</p>
+                </div>
+                
+                <div class="skills-content">
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3><i class="fas fa-laptop-code"></i> تطوير الواجهات الأمامية</h3>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">HTML/CSS</span>
+                                        <span class="skill-percentage">45%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="45"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">JavaScript</span>
+                                        <span class="skill-percentage">42%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="42"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">React.js</span>
+                                        <span class="skill-percentage">40%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="40"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Vue.js</span>
+                                        <span class="skill-percentage">38%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="38"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h3><i class="fas fa-server"></i> تطوير الخلفية</h3>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Node.js</span>
+                                        <span class="skill-percentage">45%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="45"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Python</span>
+                                        <span class="skill-percentage">43%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="43"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">MongoDB</span>
+                                        <span class="skill-percentage">35%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="35"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h3><i class="fas fa-palette"></i> التصميم</h3>
+                            <div class="skills-list">
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">UI/UX Design</span>
+                                        <span class="skill-percentage">44%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="44"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Figma</span>
+                                        <span class="skill-percentage">41%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="41"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="skill-info">
+                                        <span class="skill-name">Photoshop</span>
+                                        <span class="skill-percentage">39%</span>
+                                    </div>
+                                    <div class="skill-bar">
+                                        <div class="skill-progress" data-width="39"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="experience-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">مسيرتي المهنية</span>
+                    <h2 class="section-title">رحلتي في عالم التطوير والتحليل</h2>
+                    <p class="section-subtitle">محطات رئيسية تجمع بين الذكاء الاصطناعي، التحليل، والمحتوى الرقمي</p>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2023 – حتى الآن</div>
+                        <div class="timeline-content">
+                            <h3>مطور برمجيات وباحث في الذكاء الاصطناعي</h3>
+                            <h4>مشاريع شخصية وتقنية مستقلة</h4>
+                            <p>تطوير أنظمة ذكية لتحليل الفيديوهات باستخدام تقنيات الذكاء الاصطناعي والتعلم الآلي. بناء مساعد برمجي برؤية بحثية يدمج بين تطوير النماذج وتحسين الأداء. العمل على مشاريع شخصية تستهدف الدمج بين الابتكار العملي والجانب الأكاديمي.</p>
+                            <div class="timeline-skills">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Machine Learning</span>
+                                <span class="skill-tag">AI Development</span>
+                                <span class="skill-tag">System Design</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2022 – 2023</div>
+                        <div class="timeline-content">
+                            <h3>محلل بيانات ومتخصص في علوم الحاسوب</h3>
+                            <h4>مشاريع جامعية وأكاديمية</h4>
+                            <p>تنفيذ مشروع تطبيقي لحماية الشبكة الداخلية لقسم الحاسوب في الجامعة، يتضمن تحليل الثغرات، تصميم حلول أمنية، وتطبيق استراتيجيات حماية عملية. تطوير تطبيق لتحديد المسافات المثلى بين الأشجار باستخدام تقنيات التحليل الحسابي لتحسين استغلال المساحات الزراعية.</p>
+                            <div class="timeline-skills">
+                                <span class="skill-tag">Network Security</span>
+                                <span class="skill-tag">Data Analysis</span>
+                                <span class="skill-tag">Academic Research</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-date">2021 – 2022</div>
+                        <div class="timeline-content">
+                            <h3>إدارة المحتوى الرقمي وصناعة الفيديو</h3>
+                            <h4>مشاريع شخصية ومنصات رقمية</h4>
+                            <p>إنتاج محتوى مرئي وتطوير استراتيجيات نشر فعّالة للجمهور الرقمي. تحسين تفاعل الجمهور باستخدام أدوات تحليل الأداء الرقمي، واكتساب خبرة عملية في إدارة القنوات الرقمية وتطوير المحتوى.</p>
+                            <div class="timeline-skills">
+                                <span class="skill-tag">Content Creation</span>
+                                <span class="skill-tag">Video Editing</span>
+                                <span class="skill-tag">Digital Marketing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="projects-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">أعمالي</span>
+                    <h2 class="section-title">المشاريع المختارة</h2>
+                    <p class="section-subtitle">مجموعة من أفضل المشاريع التي عملت عليها</p>
+                </div>
+                
+                <div class="projects-filter">
+                    <button class="filter-btn active" data-filter="all">جميع المشاريع</button>
+                    <button class="filter-btn" data-filter="تطوير ويب">تطوير ويب</button>
+                </div>
+                
+                <div class="projects-grid" id="projectsGrid">
+                    <div class="project-card" data-category="تطوير ويب">
+                        <div class="project-image">
+                            <img src="https://everpic-plus.preview.emergentagent.com/api/f/F0V1ChcY" alt="EverPic">
+                            <div class="project-overlay">
+                                <div class="project-actions">
+                                    <button class="project-btn" onclick="openProjectModal(0)">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <a href="https://everpic-plus.preview.emergentagent.com/" class="project-btn" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-category">تطوير ويب</div>
+                            <h3 class="project-title">EverPic</h3>
+                            <p class="project-description">أداة برمجية تقوم بتحويل أي صورة بأي صيغة إلى رابط مباشر قابل للاستخدام في المواقع والتطبيقات.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Flask / FastAPI</span>
+                                <span class="tech-tag">HTML / CSS / JavaScript</span>
+                                <span class="tech-tag">Amazon S3</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card" data-category="تطوير ويب">
+                        <div class="project-image">
+                            <img src="https://everpic-plus.preview.emergentagent.com/api/f/Sk6Xkwej" alt="منصة التجارة الإلكترونية – TURBO STORE">
+                            <div class="project-overlay">
+                                <div class="project-actions">
+                                    <button class="project-btn" onclick="openProjectModal(1)">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <a href="https://turbo-store-8b47e.web.app/" class="project-btn" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-content">
+                            <div class="project-category">تطوير ويب <span class="status-badge status-badge--danger">قيد التطوير</span></div>
+                            <h3 class="project-title">منصة التجارة الإلكترونية – TURBO STORE</h3>
+                            <p class="project-description">متجر إلكتروني لبيع اشتراكات الألعاب الرقمية مثل Xbox Game Pass Ultimate مع سلة ذكية وتجربة دفع آمنة.</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">React</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">MongoDB</span>
+                                <span class="tech-tag">Stripe API</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="services-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">ما أقدمه</span>
+                    <h2 class="section-title">الخدمات</h2>
+                    <p class="section-subtitle">حلول تقنية شاملة لجميع احتياجاتك الرقمية</p>
+                </div>
+                
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="service-title">تطوير المواقع</h3>
+                        <p class="service-description">تطوير مواقع احترافية سريعة وآمنة باستخدام أحدث التقنيات</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> تصميم متجاوب</li>
+                            <li><i class="fas fa-check"></i> أداء عالي</li>
+                            <li><i class="fas fa-check"></i> SEO محسن</li>
+                            <li><i class="fas fa-check"></i> أمان متقدم</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card featured">
+                        <div class="service-badge">الأكثر طلباً</div>
+                        <div class="service-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3 class="service-title">تصميم UI/UX</h3>
+                        <p class="service-description">تصميم واجهات مستخدم جذابة وتجارب استخدام متميزة</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> أبحاث المستخدم</li>
+                            <li><i class="fas fa-check"></i> النماذج الأولية</li>
+                            <li><i class="fas fa-check"></i> اختبارات التجربة</li>
+                            <li><i class="fas fa-check"></i> التصميم التفاعلي</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 class="service-title">تطوير التطبيقات</h3>
+                        <p class="service-description">إنشاء تطبيقات جوال وويب متقدمة بوظائف متكاملة</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> تطبيقات الجوال</li>
+                            <li><i class="fas fa-check"></i> تطبيقات الويب</li>
+                            <li><i class="fas fa-check"></i> PWA</li>
+                            <li><i class="fas fa-check"></i> التطبيقات الهجينة</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3 class="service-title">الاستشارات التقنية</h3>
+                        <p class="service-description">مشورة تقنية متخصصة لاختيار أفضل الحلول لمشروعك</p>
+                        <ul class="service-features">
+                            <li><i class="fas fa-check"></i> تحليل المتطلبات</li>
+                            <li><i class="fas fa-check"></i> اختيار التقنيات</li>
+                            <li><i class="fas fa-check"></i> تخطيط المشروع</li>
+                            <li><i class="fas fa-check"></i> إدارة الفريق</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">تواصل معي</span>
+                    <h2 class="section-title">لنبدأ مشروعك القادم</h2>
+                    <p class="section-subtitle">دعنا نحول فكرتك إلى واقع رقمي مميز</p>
+                </div>
+                
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>العنوان</h4>
+                                <p>العراق، صلاح الدين</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>الهاتف</h4>
+                                <p>078********</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>البريد الإلكتروني</h4>
+                                <p>zaiddzaid666@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>الحالة</h4>
+                                <p class="status">يقوم بالتطوير الآن</p>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <h4>تابعني على</h4>
+                            <div class="social-icons">
+                                <a href="https://github.com/t10lq" target="_blank">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://linkedin.com/in/osama-zaid-dhiab" target="_blank">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="https://twitter.com/osama_zaid_dhiab" target="_blank">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://www.instagram.com/d.rxv?igsh=NGd6d2RhM2J5bDl5&utm_source=qr" target="_blank">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form-container">
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name" class="form-label">الاسم</label>
+                                    <input type="text" id="name" name="name" class="form-control" required>
+                                    <div class="form-error"></div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="email" class="form-label">البريد الإلكتروني</label>
+                                    <input type="email" id="email" name="email" class="form-control" required>
+                                    <div class="form-error"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="subject" class="form-label">الموضوع</label>
+                                <input type="text" id="subject" name="subject" class="form-control" required>
+                                <div class="form-error"></div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message" class="form-label">الرسالة</label>
+                                <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
+                                <div class="form-error"></div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn--primary btn--full-width">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>إرسال الرسالة</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="brand-logo">
+                        <i class="fas fa-code"></i>
+                        <span>اسامة زيد ذياب</span>
+                    </div>
+                    <p>مطور ويب ومصمم UI/UX محترف يسعى لتقديم حلول رقمية مبتكرة وعالية الجودة</p>
+                    <div class="footer-social">
+                        <a href="https://github.com/t10lq" target="_blank">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/osama-zaid-dhiab" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="https://twitter.com/osama_zaid_dhiab" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.instagram.com/d.rxv?igsh=NGd6d2RhM2J5bDl5&utm_source=qr" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>روابط سريعة</h4>
+                    <ul>
+                        <li><a href="#about">نبذة عني</a></li>
+                        <li><a href="#skills">المهارات</a></li>
+                        <li><a href="#projects">المشاريع</a></li>
+                        <li><a href="#services">الخدمات</a></li>
+                        <li><a href="#contact">تواصل معي</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>معلومات التواصل</h4>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>zaiddzaid666@gmail.com</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>078********</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>العراق، صلاح الدين</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 اسامة زيد ذياب. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Project Modal -->
+    <div id="projectModal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeProjectModal()"></div>
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeProjectModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="modal-body" id="modalBody">
+                <!-- Project details will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
