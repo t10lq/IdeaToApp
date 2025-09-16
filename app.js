@@ -731,33 +731,7 @@ class AhmedPortfolio {
         
         console.log('📧 Form data:', data);
         
-        // Try Formspree first
-        try {
-            // Add additional data to formData
-            formData.append('_subject', 'رسالة جديدة من موقع المحفظة الشخصية - اسامة زيد ذياب');
-            formData.append('_cc', 'zaiddzaid666@gmail.com');
-            
-            const response = await fetch('https://formspree.io/f/xpwnqkqg', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            });
-            
-            if (response.ok) {
-                this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
-                form.reset();
-                return;
-            } else {
-                const errorData = await response.json();
-                console.log('Formspree error:', errorData);
-            }
-        } catch (error) {
-            console.log('❌ Formspree failed, trying alternative...', error);
-        }
-        
-        // Try EmailJS as alternative
+        // Try EmailJS
         try {
             if (typeof emailjs !== 'undefined') {
                 const result = await emailjs.send(
@@ -782,7 +756,7 @@ class AhmedPortfolio {
             console.log('❌ EmailJS failed:', error);
         }
         
-        // Show contact information instead of mailto
+        // Show contact information as fallback
         this.showContactInfo(data);
         
         // Restore button state
