@@ -743,42 +743,97 @@ class AhmedPortfolio {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
         submitBtn.disabled = true;
         
-        // Use direct mailto approach for better reliability
-        console.log('📧 Using direct mailto approach for better reliability');
+        // Send email using a simple backend service
+        console.log('📧 Sending email via backend service');
         
-        // Create mailto link
-        const subject = encodeURIComponent(data.subject);
-        const body = encodeURIComponent(
-            `الاسم: ${data.from_name}\n` +
-            `البريد الإلكتروني: ${data.from_email}\n` +
-            `الموضوع: ${data.subject}\n\n` +
-            `الرسالة:\n${data.message}\n\n` +
-            `---\n` +
-            `تم إرسال هذه الرسالة من موقع المحفظة الشخصية`
-        );
-        
-        const mailtoLink = `mailto:zaiddzaid666@gmail.com?subject=${subject}&body=${body}`;
-        
-        // Open mailto link
         try {
-            window.location.href = mailtoLink;
+            // Use a simple email service
+            const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    service_id: 'service_2qpq3wr',
+                    template_id: 'template_6qso35c',
+                    user_id: 'iYbMaC9BUXhCgMfkx',
+                    template_params: {
+                        from_name: data.from_name,
+                        from_email: data.from_email,
+                        subject: data.subject,
+                        message: data.message,
+                        to_email: 'zaiddzaid666@gmail.com'
+                    }
+                })
+            });
             
-            // Show success message
-            this.showToast('تم فتح برنامج البريد الإلكتروني مع رسالتك جاهزة للإرسال!', 'success');
-            
-            // Reset form after a delay
-            setTimeout(() => {
+            if (response.ok) {
+                this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
                 form.reset();
-            }, 2000);
+            } else {
+                throw new Error('Email service failed');
+            }
             
         } catch (error) {
-            console.error('❌ Error opening mailto:', error);
-            this.showToast('حدث خطأ في فتح برنامج البريد الإلكتروني', 'error');
+            console.error('❌ Email sending error:', error);
+            
+            // Fallback: Show contact information
+            this.showContactInfo(data);
         }
         
         // Restore button state
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
+    }
+
+    showContactInfo(data) {
+        // Show contact information as fallback
+        const contactInfo = `
+            <div style="text-align: center; padding: 20px;">
+                <h3 style="color: var(--portfolio-primary); margin-bottom: 15px;">معلومات التواصل</h3>
+                <p style="margin-bottom: 10px;"><strong>البريد الإلكتروني:</strong> zaiddzaid666@gmail.com</p>
+                <p style="margin-bottom: 10px;"><strong>الهاتف:</strong> 078********</p>
+                <p style="margin-bottom: 20px;"><strong>الموقع:</strong> العراق، صلاح الدين</p>
+                
+                <div style="background: var(--glass-bg); padding: 15px; border-radius: 8px; margin: 15px 0;">
+                    <h4 style="color: var(--color-text); margin-bottom: 10px;">تفاصيل رسالتك:</h4>
+                    <p><strong>الاسم:</strong> ${data.from_name}</p>
+                    <p><strong>البريد:</strong> ${data.from_email}</p>
+                    <p><strong>الموضوع:</strong> ${data.subject}</p>
+                    <p><strong>الرسالة:</strong> ${data.message}</p>
+                </div>
+                
+                <p style="color: var(--color-text-secondary); font-size: 14px; margin-bottom: 15px;">
+                    يرجى نسخ هذه المعلومات وإرسالها عبر البريد الإلكتروني أو الهاتف
+                </p>
+                
+                <button onclick="copyContactInfo()" style="background: var(--portfolio-primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin: 5px;">
+                    <i class="fas fa-copy"></i> نسخ المعلومات
+                </button>
+                
+                <button onclick="window.open('mailto:zaiddzaid666@gmail.com?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(`الاسم: ${data.from_name}\nالبريد: ${data.from_email}\nالموضوع: ${data.subject}\nالرسالة: ${data.message}`)}', '_blank')" style="background: var(--color-success); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin: 5px;">
+                    <i class="fas fa-envelope"></i> فتح البريد الإلكتروني
+                </button>
+            </div>
+        `;
+        
+        // Create modal to show contact info
+        const modal = document.createElement('div');
+        modal.className = 'modal';
+        modal.innerHTML = `
+            <div class="modal-overlay" onclick="this.parentElement.remove()"></div>
+            <div class="modal-content" style="max-width: 500px;">
+                <button class="modal-close" onclick="this.closest('.modal').remove()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="modal-body">
+                    ${contactInfo}
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+        modal.classList.remove('hidden');
     }
 
 
@@ -861,6 +916,31 @@ function closeProjectModal() {
     }
 }
 
+function copyContactInfo() {
+    const contactText = `
+معلومات التواصل:
+البريد الإلكتروني: zaiddzaid666@gmail.com
+الهاتف: 078********
+الموقع: العراق، صلاح الدين
+
+تفاصيل الرسالة:
+الاسم: ${document.querySelector('#name')?.value || ''}
+البريد: ${document.querySelector('#email')?.value || ''}
+الموضوع: ${document.querySelector('#subject')?.value || ''}
+الرسالة: ${document.querySelector('#message')?.value || ''}
+    `.trim();
+    
+    navigator.clipboard.writeText(contactText).then(() => {
+        if (window.portfolio) {
+            window.portfolio.showToast('تم نسخ المعلومات إلى الحافظة!', 'success');
+        }
+    }).catch(() => {
+        if (window.portfolio) {
+            window.portfolio.showToast('فشل في نسخ المعلومات', 'error');
+        }
+    });
+}
+
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
@@ -870,6 +950,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Make functions globally available
     window.openProjectModal = openProjectModal;
     window.closeProjectModal = closeProjectModal;
+    window.copyContactInfo = copyContactInfo;
     
     console.log('🎉 Portfolio ready!');
 });
