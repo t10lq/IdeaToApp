@@ -772,41 +772,17 @@ class AhmedPortfolio {
                 return;
             }
         } catch (error) {
-            console.log('❌ Alternative service failed, using mailto...');
+            console.log('❌ Alternative service failed');
         }
         
-        // Fallback to mailto
-        this.useMailtoFallback(data);
+        // Show contact information instead of mailto
+        this.showContactInfo(data);
         
         // Restore button state
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
     }
 
-    useMailtoFallback(data) {
-        console.log('📧 Using mailto fallback...');
-        
-        const subject = encodeURIComponent(data.subject);
-        const body = encodeURIComponent(
-            `الاسم: ${data.name}\n` +
-            `البريد الإلكتروني: ${data.email}\n` +
-            `الموضوع: ${data.subject}\n\n` +
-            `الرسالة:\n${data.message}\n\n` +
-            `---\n` +
-            `تم إرسال هذه الرسالة من موقع المحفظة الشخصية`
-        );
-        
-        const mailtoLink = `mailto:zaiddzaid666@gmail.com?subject=${subject}&body=${body}`;
-        
-        // Open mailto link
-        try {
-            window.location.href = mailtoLink;
-            this.showToast('تم فتح برنامج البريد الإلكتروني مع رسالتك جاهزة للإرسال!', 'success');
-        } catch (error) {
-            console.error('❌ Error opening mailto:', error);
-            this.showToast('حدث خطأ في فتح برنامج البريد الإلكتروني', 'error');
-        }
-    }
 
     showContactInfo(data) {
         // Show contact information as fallback
@@ -819,8 +795,8 @@ class AhmedPortfolio {
                 
                 <div style="background: var(--glass-bg); padding: 15px; border-radius: 8px; margin: 15px 0;">
                     <h4 style="color: var(--color-text); margin-bottom: 10px;">تفاصيل رسالتك:</h4>
-                    <p><strong>الاسم:</strong> ${data.from_name}</p>
-                    <p><strong>البريد:</strong> ${data.from_email}</p>
+                    <p><strong>الاسم:</strong> ${data.name}</p>
+                    <p><strong>البريد:</strong> ${data.email}</p>
                     <p><strong>الموضوع:</strong> ${data.subject}</p>
                     <p><strong>الرسالة:</strong> ${data.message}</p>
                 </div>
@@ -831,10 +807,6 @@ class AhmedPortfolio {
                 
                 <button onclick="copyContactInfo()" style="background: var(--portfolio-primary); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin: 5px;">
                     <i class="fas fa-copy"></i> نسخ المعلومات
-                </button>
-                
-                <button onclick="window.open('mailto:zaiddzaid666@gmail.com?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(`الاسم: ${data.from_name}\nالبريد: ${data.from_email}\nالموضوع: ${data.subject}\nالرسالة: ${data.message}`)}', '_blank')" style="background: var(--color-success); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin: 5px;">
-                    <i class="fas fa-envelope"></i> فتح البريد الإلكتروني
                 </button>
             </div>
         `;
