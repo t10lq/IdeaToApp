@@ -168,15 +168,15 @@ class AhmedPortfolio {
                     const sectionTop = section.offsetTop - navHeight - 20; // Extra padding
                     
                     console.log('📏 Scroll calculation:', {
-                        sectionTop: section.offsetTop,
+                        sectioninset-block-start: section.offsetTop,
                         navHeight,
-                        finalTop: sectionTop
+                        finalinset-block-start: sectionTop
                     });
                     
                     // Smooth scroll with fallback
                     try {
                         window.scrollTo({
-                            top: Math.max(0, sectionTop),
+                            inset-block-start: Math.max(0, sectionTop),
                             behavior: 'smooth'
                         });
                         
@@ -446,9 +446,9 @@ class AhmedPortfolio {
         modalBody.innerHTML = `
             <div style="padding: 2rem;">
                 <img src="${project.image}" alt="${project.title}" 
-                     style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
+                     style="inline-size: 100%; block-size: 300px; object-fit: cover; border-radius: 8px; margin-block-end: 1.5rem;">
                 
-                <div style="margin-bottom: 1rem;">
+                <div style="margin-block-end: 1rem;">
                     <span style="background: var(--glass-bg); padding: 0.25rem 0.75rem; border-radius: 20px; 
                                 font-size: 0.875rem; color: var(--portfolio-primary);">
                         ${project.category}
@@ -456,16 +456,16 @@ class AhmedPortfolio {
                     ${project.status ? `<span class="status-badge status-badge--danger">${project.status}</span>` : ''}
                 </div>
                 
-                <h2 style="color: var(--color-text); margin-bottom: 1rem; font-size: 1.75rem;">
+                <h2 style="color: var(--color-text); margin-block-end: 1rem; font-size: 1.75rem;">
                     ${project.title}
                 </h2>
                 
-                <p style="color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
+                <p style="color: var(--color-text-secondary); line-height: 1.6; margin-block-end: 1.5rem;">
                     ${project.description}
                 </p>
                 
-                <div style="margin-bottom: 1.5rem;">
-                    <h4 style="color: var(--color-text); margin-bottom: 0.75rem;">التقنيات المستخدمة:</h4>
+                <div style="margin-block-end: 1.5rem;">
+                    <h4 style="color: var(--color-text); margin-block-end: 0.75rem;">التقنيات المستخدمة:</h4>
                     <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                         ${project.tech.map(tech => `
                             <span style="background: var(--gradient-primary); color: white; 
@@ -476,29 +476,29 @@ class AhmedPortfolio {
                     </div>
                 </div>
                 
-                <div style="margin-bottom: 1.5rem;">
-                    <h4 style="color: var(--color-text); margin-bottom: 0.75rem;">الميزات الرئيسية:</h4>
-                    <ul style="color: var(--color-text-secondary); line-height: 1.6; padding-right: 1.25rem;">
-                        ${project.features.map(feature => `<li style="margin-bottom: 0.5rem;">${feature}</li>`).join('')}
+                <div style="margin-block-end: 1.5rem;">
+                    <h4 style="color: var(--color-text); margin-block-end: 0.75rem;">الميزات الرئيسية:</h4>
+                    <ul style="color: var(--color-text-secondary); line-height: 1.6; padding-inline-end: 1.25rem;">
+                        ${project.features.map(feature => `<li style="margin-block-end: 0.5rem;">${feature}</li>`).join('')}
                     </ul>
                 </div>
                 
-                <div style="margin-bottom: 1.5rem;">
-                    <h4 style="color: var(--color-text); margin-bottom: 0.75rem;">التحديات:</h4>
+                <div style="margin-block-end: 1.5rem;">
+                    <h4 style="color: var(--color-text); margin-block-end: 0.75rem;">التحديات:</h4>
                     <p style="color: var(--color-text-secondary); line-height: 1.6;">
                         ${project.challenges}
                     </p>
                 </div>
                 
                 <div>
-                    <h4 style="color: var(--color-text); margin-bottom: 0.75rem;">النتائج:</h4>
+                    <h4 style="color: var(--color-text); margin-block-end: 0.75rem;">النتائج:</h4>
                     <p style="color: var(--color-text-secondary); line-height: 1.6;">
                         ${project.results}
                     </p>
                 </div>
                 
                 ${project.link ? `
-                <div style="margin-top: 2rem; display: flex; gap: 0.75rem;">
+                <div style="margin-block-start: 2rem; display: flex; gap: 0.75rem;">
                     <a href="${project.link}" target="_blank" rel="noopener" 
                        style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--portfolio-primary); color: white; padding: 0.75rem 1rem; border-radius: 8px; text-decoration: none;">
                         <i class="fas fa-external-link-alt"></i>
@@ -630,13 +630,7 @@ class AhmedPortfolio {
     async handleFormSubmission(form) {
         console.log('📧 Handling form submission...');
         
-        // Show loading state
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
-        submitBtn.disabled = true;
-        
-        // Get form data
+        // Get form data first
         const formData = new FormData(form);
         const data = {
             name: formData.get('name'),
@@ -647,10 +641,14 @@ class AhmedPortfolio {
         
         console.log('📧 Form data:', data);
         
-        let emailSent = false;
+        // Show loading state
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+        submitBtn.disabled = true;
         
-        // Try EmailJS
         try {
+            // Try EmailJS
             if (typeof emailjs !== 'undefined') {
                 console.log('📧 Attempting EmailJS send...');
                 const result = await emailjs.send(
@@ -671,46 +669,23 @@ class AhmedPortfolio {
                     console.log('✅ Email sent successfully!');
                     this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
                     form.reset();
-                    emailSent = true;
                 } else {
-                    console.log('❌ EmailJS returned non-200 status:', result.status);
+                    throw new Error('EmailJS returned non-200 status: ' + result.status);
                 }
             } else {
-                console.log('❌ EmailJS not available');
+                throw new Error('EmailJS not available');
             }
         } catch (error) {
             console.log('❌ EmailJS failed:', error);
             this.showToast('حدث خطأ في الإرسال، يرجى المحاولة مرة أخرى', 'error');
-        }
-        
-        // If email didn't send successfully, show contact info
-        if (!emailSent) {
-            console.log('📧 Showing contact info as fallback');
             this.showContactInfo(data);
-        }
-        
-        // Always restore button state - this is critical!
-        console.log('🔄 Restoring button state...');
-        
-        // Multiple attempts to restore button state
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        
-        // Force UI update
-        setTimeout(() => {
+        } finally {
+            // Always restore button state - this is critical!
+            console.log('🔄 Restoring button state...');
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
             console.log('✅ Button state restored');
-        }, 50);
-        
-        // Additional safety check
-        setTimeout(() => {
-            if (submitBtn.disabled) {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalText;
-                console.log('🔧 Button state force restored');
-            }
-        }, 200);
+        }
     }
 
 
@@ -718,20 +693,20 @@ class AhmedPortfolio {
         // Show contact information as fallback
         const contactInfo = `
             <div style="text-align: center; padding: 20px;">
-                <h3 style="color: var(--portfolio-primary); margin-bottom: 15px;">معلومات التواصل</h3>
-                <p style="margin-bottom: 10px;"><strong>البريد الإلكتروني:</strong> zaiddzaid666@gmail.com</p>
-                <p style="margin-bottom: 10px;"><strong>الهاتف:</strong> 078********</p>
-                <p style="margin-bottom: 20px;"><strong>الموقع:</strong> العراق، صلاح الدين</p>
+                <h3 style="color: var(--portfolio-primary); margin-block-end: 15px;">معلومات التواصل</h3>
+                <p style="margin-block-end: 10px;"><strong>البريد الإلكتروني:</strong> zaiddzaid666@gmail.com</p>
+                <p style="margin-block-end: 10px;"><strong>الهاتف:</strong> 078********</p>
+                <p style="margin-block-end: 20px;"><strong>الموقع:</strong> العراق، صلاح الدين</p>
                 
                 <div style="background: var(--glass-bg); padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4 style="color: var(--color-text); margin-bottom: 10px;">تفاصيل رسالتك:</h4>
+                    <h4 style="color: var(--color-text); margin-block-end: 10px;">تفاصيل رسالتك:</h4>
                     <p><strong>الاسم:</strong> ${data.name}</p>
                     <p><strong>البريد:</strong> ${data.email}</p>
                     <p><strong>الموضوع:</strong> ${data.subject}</p>
                     <p><strong>الرسالة:</strong> ${data.message}</p>
                 </div>
                 
-                <p style="color: var(--color-text-secondary); font-size: 14px; margin-bottom: 15px;">
+                <p style="color: var(--color-text-secondary); font-size: 14px; margin-block-end: 15px;">
                     يرجى نسخ هذه المعلومات وإرسالها عبر البريد الإلكتروني أو الهاتف
                 </p>
                 
@@ -746,7 +721,7 @@ class AhmedPortfolio {
         modal.className = 'modal';
         modal.innerHTML = `
             <div class="modal-overlay" onclick="this.parentElement.remove()"></div>
-            <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-content" style="max-inline-size: 500px;">
                 <button class="modal-close" onclick="this.closest('.modal').remove()">
                     <i class="fas fa-times"></i>
                 </button>
