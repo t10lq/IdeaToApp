@@ -731,6 +731,8 @@ class AhmedPortfolio {
         
         console.log('📧 Form data:', data);
         
+        let emailSent = false;
+        
         // Try EmailJS
         try {
             if (typeof emailjs !== 'undefined') {
@@ -749,10 +751,7 @@ class AhmedPortfolio {
                 if (result.status === 200) {
                     this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
                     form.reset();
-                    // Restore button state after successful submission
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                    return;
+                    emailSent = true;
                 }
             }
         } catch (error) {
@@ -760,10 +759,12 @@ class AhmedPortfolio {
             this.showToast('حدث خطأ في الإرسال، يرجى المحاولة مرة أخرى', 'error');
         }
         
-        // Show contact information as fallback
-        this.showContactInfo(data);
+        // If email didn't send successfully, show contact info
+        if (!emailSent) {
+            this.showContactInfo(data);
+        }
         
-        // Restore button state
+        // Always restore button state
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
     }
