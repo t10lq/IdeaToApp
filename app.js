@@ -626,90 +626,6 @@ class AhmedPortfolio {
         }
     }
 
-    async handleFormSubmit(form) {
-        console.log('📝 Form submission started');
-        
-        const inputs = form.querySelectorAll('.form-control');
-        let isFormValid = true;
-        
-        // Validate all fields
-        inputs.forEach(input => {
-            if (!this.validateField(input)) {
-                isFormValid = false;
-            }
-        });
-        
-        if (!isFormValid) {
-            this.showToast('يرجى تصحيح الأخطاء في النموذج', 'error');
-            return;
-        }
-        
-        // Get form data
-        const formData = new FormData(form);
-        const data = {
-            from_name: formData.get('name'),
-            from_email: formData.get('email'),
-            subject: formData.get('subject'),
-            message: formData.get('message'),
-            to_email: 'zaiddzaid666@gmail.com' // Your email address
-        };
-        
-        // Validate required data
-        if (!data.from_name || !data.from_email || !data.subject || !data.message) {
-            this.showToast('يرجى ملء جميع الحقول المطلوبة', 'error');
-            return;
-        }
-        
-        console.log('📧 Form data validated:', data);
-        
-        // Show loading state
-        const submitBtn = form.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
-        submitBtn.disabled = true;
-        
-        // Send email using a simple backend service
-        console.log('📧 Sending email via backend service');
-        
-        try {
-            // Use a simple email service
-            const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    service_id: 'service_2qpq3wr',
-                    template_id: 'template_6qso35c',
-                    user_id: 'iYbMaC9BUXhCgMfkx',
-                    template_params: {
-                        from_name: data.from_name,
-                        from_email: data.from_email,
-                        subject: data.subject,
-                        message: data.message,
-                        to_email: 'zaiddzaid666@gmail.com'
-                    }
-                })
-            });
-            
-            if (response.ok) {
-                this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
-                form.reset();
-            } else {
-                throw new Error('Email service failed');
-            }
-            
-        } catch (error) {
-            console.error('❌ Email sending error:', error);
-            
-            // Fallback: Show contact information
-            this.showContactInfo(data);
-        }
-        
-        // Restore button state
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-    }
 
     async handleFormSubmission(form) {
         console.log('📧 Handling form submission...');
@@ -775,14 +691,26 @@ class AhmedPortfolio {
         
         // Always restore button state - this is critical!
         console.log('🔄 Restoring button state...');
+        
+        // Multiple attempts to restore button state
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
         
-        // Force a small delay to ensure UI updates
+        // Force UI update
         setTimeout(() => {
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
-        }, 100);
+            console.log('✅ Button state restored');
+        }, 50);
+        
+        // Additional safety check
+        setTimeout(() => {
+            if (submitBtn.disabled) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+                console.log('🔧 Button state force restored');
+            }
+        }, 200);
     }
 
 
