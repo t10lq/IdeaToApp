@@ -9,7 +9,7 @@ class AhmedPortfolio {
                     title: "EverPic",
                     description: "أداة برمجية تقوم بتحويل أي صورة بأي صيغة إلى رابط مباشر قابل للاستخدام في المواقع والتطبيقات، مما يسهل مشاركة الصور على الإنترنت دون الحاجة إلى رفعها بشكل تقليدي.",
                     category: "تطوير ويب",
-                    image: "https://everpic-plus.preview.emergentagent.com/api/f/F0V1ChcY",
+                    image: "images/everpic-project.jpg",
                     link: "https://everpic-plus.preview.emergentagent.com/",
                     tech: ["Python", "Flask / FastAPI", "HTML / CSS / JavaScript", "Amazon S3"],
                     features: [
@@ -25,7 +25,7 @@ class AhmedPortfolio {
                     title: "منصة التجارة الإلكترونية – TURBO STORE",
                     description: "متجر إلكتروني متكامل متخصص في بيع اشتراكات الألعاب الرقمية مثل Xbox Game Pass Ultimate، مع قسم للألعاب الرقمية وسلة ذكية تحفظ المنتجات.",
                     category: "تطوير ويب",
-                    image: "https://everpic-plus.preview.emergentagent.com/api/f/Sk6Xkwej",
+                    image: "images/turbo-store-project.jpg",
                     link: "https://turbo-store-8b47e.web.app/",
                     status: "قيد التطوير",
                     tech: ["HTML", "CSS", "JavaScript (React)", "Node.js", "MongoDB", "Stripe API"],
@@ -47,21 +47,21 @@ class AhmedPortfolio {
                     name: "سارة أحمد",
                     position: "مدير التسويق - شركة النجاح",
                     text: "عمل اسامة زيد ذياب على تطوير موقعنا الإلكتروني كان استثنائياً. التصميم جميل والأداء سريع جداً. فريقنا والعملاء معجبون بالنتيجة.",
-                    image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+                    image: "images/testimonial1.jpg",
                     rating: 5
                 },
                 {
                     name: "محمد الخالدي",
                     position: "مؤسس - متجر التقنية",
                     text: "تطبيق التجارة الإلكترونية الذي طوّره اسامة زيد ذياب زاد من مبيعاتنا بنسبة 200%. التطبيق سهل الاستخدام وآمن تماماً.",
-                    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+                    image: "images/testimonial2.jpg",
                     rating: 5
                 },
                 {
                     name: "نور الإبراهيم",
                     position: "مديرة المشاريع - شركة الإبداع",
                     text: "التعامل مع اسامة زيد ذياب كان ممتازاً. يلتزم بالمواعيد ويقدم جودة عالية. أنصح بالتعامل معه لأي مشروع تقني.",
-                    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+                    image: "images/testimonial3.jpg",
                     rating: 5
                 }
             ],
