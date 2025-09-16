@@ -947,6 +947,47 @@ function testForm() {
     }
 }
 
+// Test button restoration specifically
+function testButtonRestoration() {
+    console.log('🧪 Testing button restoration...');
+    
+    const submitBtn = document.querySelector('button[type="submit"]');
+    if (!submitBtn) {
+        console.error('❌ Submit button not found');
+        return;
+    }
+    
+    console.log('🔍 Original button state:', {
+        innerHTML: submitBtn.innerHTML,
+        disabled: submitBtn.disabled
+    });
+    
+    // Simulate loading state
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+    submitBtn.disabled = true;
+    
+    console.log('🔄 Button set to loading state');
+    
+    // Test restoration after 2 seconds
+    setTimeout(() => {
+        console.log('🔄 Testing restoration...');
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        
+        // Force DOM update
+        submitBtn.style.display = 'none';
+        submitBtn.offsetHeight;
+        submitBtn.style.display = '';
+        
+        console.log('✅ Button restoration test completed');
+        console.log('🔍 Final button state:', {
+            innerHTML: submitBtn.innerHTML,
+            disabled: submitBtn.disabled
+        });
+    }, 2000);
+}
+
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
