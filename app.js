@@ -622,6 +622,13 @@ class AhmedPortfolio {
         const form = document.getElementById('contactForm');
         if (!form) return;
         
+        // Check if EmailJS is available
+        if (typeof emailjs === 'undefined') {
+            console.error('❌ EmailJS is not loaded. Please check the script tag.');
+            this.showToast('خدمة البريد الإلكتروني غير متاحة حالياً', 'error');
+            return;
+        }
+        
         // Initialize EmailJS
         this.initializeEmailJS();
         
@@ -642,7 +649,12 @@ class AhmedPortfolio {
     initializeEmailJS() {
         // EmailJS configuration - replace with your actual service ID
         // Get your public key from EmailJS dashboard: https://dashboard.emailjs.com/admin/integration
-        emailjs.init("iYbMaC9BUXhCgMfkx"); // EmailJS public key
+        try {
+            emailjs.init("iYbMaC9BUXhCgMfkx"); // EmailJS public key
+            console.log('✅ EmailJS initialized successfully');
+        } catch (error) {
+            console.error('❌ EmailJS initialization failed:', error);
+        }
     }
 
     validateField(field) {
@@ -701,6 +713,12 @@ class AhmedPortfolio {
     }
 
     async handleFormSubmit(form) {
+        // Check if EmailJS is available
+        if (typeof emailjs === 'undefined') {
+            this.showToast('خدمة البريد الإلكتروني غير متاحة حالياً', 'error');
+            return;
+        }
+        
         const inputs = form.querySelectorAll('.form-control');
         let isFormValid = true;
         
@@ -726,6 +744,12 @@ class AhmedPortfolio {
             to_email: 'zaiddzaid666@gmail.com' // Your email address
         };
         
+        // Validate required data
+        if (!data.from_name || !data.from_email || !data.subject || !data.message) {
+            this.showToast('يرجى ملء جميع الحقول المطلوبة', 'error');
+            return;
+        }
+        
         // Show loading state
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
@@ -734,28 +758,50 @@ class AhmedPortfolio {
         
         try {
             // Send email using EmailJS
-            // EmailJS configuration is now complete
+            console.log('📧 Attempting to send email with data:', data);
+            console.log('📧 Using service ID: service_2qpq3wr');
+            console.log('📧 Using template ID: template_6qso35c');
+            
             const result = await emailjs.send(
                 'service_2qpq3wr', // EmailJS service ID
                 'template_6qso35c', // EmailJS template ID
                 data
             );
             
-            console.log('Email sent successfully:', result);
+            console.log('✅ Email sent successfully:', result);
             
             // Success
             this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
             form.reset();
             
         } catch (error) {
-            console.error('Email sending error:', error);
+            console.error('❌ Email sending error:', error);
             
-            // Check if it's a configuration error
-            if (error.text && error.text.includes('Invalid')) {
-                this.showToast('خطأ في إعدادات البريد الإلكتروني. يرجى مراجعة المطور', 'error');
-            } else {
-                this.showToast('حدث خطأ في إرسال الرسالة. يرجى المحاولة مرة أخرى', 'error');
+            // Detailed error handling
+            let errorMessage = 'حدث خطأ في إرسال الرسالة. يرجى المحاولة مرة أخرى';
+            
+            if (error.status === 400) {
+                errorMessage = 'خطأ في البيانات المرسلة. يرجى التحقق من المعلومات';
+            } else if (error.status === 401) {
+                errorMessage = 'خطأ في إعدادات البريد الإلكتروني. يرجى مراجعة المطور';
+            } else if (error.status === 403) {
+                errorMessage = 'تم رفض الطلب. يرجى المحاولة لاحقاً';
+            } else if (error.status === 404) {
+                errorMessage = 'خدمة البريد الإلكتروني غير متاحة حالياً';
+            } else if (error.status >= 500) {
+                errorMessage = 'خطأ في الخادم. يرجى المحاولة لاحقاً';
             }
+            
+            // Show error message with fallback option
+            this.showToastWithFallback(errorMessage, data);
+            
+            // Log detailed error for debugging
+            console.error('Error details:', {
+                status: error.status,
+                text: error.text,
+                message: error.message
+            });
+            
         } finally {
             // Restore button state
             submitBtn.innerHTML = originalText;
@@ -825,6 +871,49 @@ class AhmedPortfolio {
                 }, 300);
             }
         }, 4000);
+    }
+
+    showToastWithFallback(message, data) {
+        let container = document.getElementById('toastContainer');
+        
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'toastContainer';
+            container.className = 'toast-container';
+            document.body.appendChild(container);
+        }
+        
+        const toast = document.createElement('div');
+        toast.className = 'toast error';
+        
+        // Create mailto link as fallback
+        const subject = encodeURIComponent(data.subject);
+        const body = encodeURIComponent(`الاسم: ${data.from_name}\nالبريد الإلكتروني: ${data.from_email}\n\nالرسالة:\n${data.message}`);
+        const mailtoLink = `mailto:zaiddzaid666@gmail.com?subject=${subject}&body=${body}`;
+        
+        toast.innerHTML = `
+            <i class="fas fa-exclamation-circle"></i>
+            <div style="flex: 1;">
+                <div style="margin-bottom: 8px;">${message}</div>
+                <a href="${mailtoLink}" style="color: var(--portfolio-primary); text-decoration: underline; font-size: 0.9em;">
+                    اضغط هنا لإرسال الرسالة عبر البريد الإلكتروني
+                </a>
+            </div>
+        `;
+        
+        container.appendChild(toast);
+        
+        // Auto remove after 8 seconds (longer for fallback)
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.style.animation = 'slideInLeft 0.3s ease-out reverse';
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.remove();
+                    }
+                }, 300);
+            }
+        }, 8000);
     }
 }
 
