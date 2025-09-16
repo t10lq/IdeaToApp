@@ -644,23 +644,8 @@ class AhmedPortfolio {
         // Show loading state
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
-        
-        // Store original state
-        window.originalButtonText = originalText;
-        window.submitButton = submitBtn;
-        
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
         submitBtn.disabled = true;
-        
-        // Create a function to restore button
-        const restoreButton = () => {
-            console.log('🔄 Restoring button state...');
-            if (window.submitButton && window.originalButtonText) {
-                window.submitButton.innerHTML = window.originalButtonText;
-                window.submitButton.disabled = false;
-                console.log('✅ Button state restored');
-            }
-        };
         
         try {
             // Try EmailJS
@@ -694,16 +679,13 @@ class AhmedPortfolio {
             console.log('❌ EmailJS failed:', error);
             this.showToast('حدث خطأ في الإرسال، يرجى المحاولة مرة أخرى', 'error');
             this.showContactInfo(data);
+        } finally {
+            // Always restore button state - this is critical!
+            console.log('🔄 Restoring button state in finally block...');
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            console.log('✅ Button state restored in finally block');
         }
-        
-        // Always restore button - multiple attempts
-        restoreButton();
-        
-        // Additional attempts
-        setTimeout(restoreButton, 50);
-        setTimeout(restoreButton, 100);
-        setTimeout(restoreButton, 200);
-        setTimeout(restoreButton, 500);
     }
 
     // Global function to manually restore button (for debugging)
