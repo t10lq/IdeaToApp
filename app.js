@@ -105,15 +105,6 @@ class AhmedPortfolio {
         this.setupContactForm();
         this.setupMobileMenu();
         
-        // Test contact form
-        setTimeout(() => {
-            const contactForm = document.getElementById('contactForm');
-            if (contactForm) {
-                console.log('✅ Contact form is available in DOM');
-            } else {
-                console.error('❌ Contact form not found in DOM');
-            }
-        }, 1000);
         
         console.log('✅ Ahmed Portfolio initialized successfully');
     }
@@ -637,12 +628,7 @@ class AhmedPortfolio {
         
         console.log('✅ Contact form found, setting up...');
         
-        // Initialize EmailJS if available
-        if (typeof emailjs !== 'undefined') {
-            this.initializeEmailJS();
-        } else {
-            console.warn('⚠️ EmailJS not available, using fallback method');
-        }
+        // Using direct mailto method for maximum reliability
         
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -659,17 +645,6 @@ class AhmedPortfolio {
         console.log('✅ Contact form setup complete');
     }
 
-    // Initialize EmailJS
-    initializeEmailJS() {
-        // EmailJS configuration - replace with your actual service ID
-        // Get your public key from EmailJS dashboard: https://dashboard.emailjs.com/admin/integration
-        try {
-            emailjs.init("iYbMaC9BUXhCgMfkx"); // EmailJS public key
-            console.log('✅ EmailJS initialized successfully');
-        } catch (error) {
-            console.error('❌ EmailJS initialization failed:', error);
-        }
-    }
 
     validateField(field) {
         const value = field.value.trim();
@@ -768,64 +743,44 @@ class AhmedPortfolio {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
         submitBtn.disabled = true;
         
-        // Try EmailJS first, then fallback to mailto
-        if (typeof emailjs !== 'undefined') {
-            try {
-                // Send email using EmailJS
-                console.log('📧 Attempting to send email with EmailJS:', data);
-                console.log('📧 Using service ID: service_2qpq3wr');
-                console.log('📧 Using template ID: template_6qso35c');
-                
-                const result = await emailjs.send(
-                    'service_2qpq3wr', // EmailJS service ID
-                    'template_6qso35c', // EmailJS template ID
-                    data
-                );
-                
-                console.log('✅ Email sent successfully:', result);
-                
-                // Success
-                this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
+        // Use direct mailto approach for better reliability
+        console.log('📧 Using direct mailto approach for better reliability');
+        
+        // Create mailto link
+        const subject = encodeURIComponent(data.subject);
+        const body = encodeURIComponent(
+            `الاسم: ${data.from_name}\n` +
+            `البريد الإلكتروني: ${data.from_email}\n` +
+            `الموضوع: ${data.subject}\n\n` +
+            `الرسالة:\n${data.message}\n\n` +
+            `---\n` +
+            `تم إرسال هذه الرسالة من موقع المحفظة الشخصية`
+        );
+        
+        const mailtoLink = `mailto:zaiddzaid666@gmail.com?subject=${subject}&body=${body}`;
+        
+        // Open mailto link
+        try {
+            window.location.href = mailtoLink;
+            
+            // Show success message
+            this.showToast('تم فتح برنامج البريد الإلكتروني مع رسالتك جاهزة للإرسال!', 'success');
+            
+            // Reset form after a delay
+            setTimeout(() => {
                 form.reset();
-                
-            } catch (error) {
-                console.error('❌ EmailJS sending error:', error);
-                
-                // Detailed error handling
-                let errorMessage = 'حدث خطأ في إرسال الرسالة. يرجى المحاولة مرة أخرى';
-                
-                if (error.status === 400) {
-                    errorMessage = 'خطأ في البيانات المرسلة. يرجى التحقق من المعلومات';
-                } else if (error.status === 401) {
-                    errorMessage = 'خطأ في إعدادات البريد الإلكتروني. يرجى مراجعة المطور';
-                } else if (error.status === 403) {
-                    errorMessage = 'تم رفض الطلب. يرجى المحاولة لاحقاً';
-                } else if (error.status === 404) {
-                    errorMessage = 'خدمة البريد الإلكتروني غير متاحة حالياً';
-                } else if (error.status >= 500) {
-                    errorMessage = 'خطأ في الخادم. يرجى المحاولة لاحقاً';
-                }
-                
-                // Show error message with fallback option
-                this.showToastWithFallback(errorMessage, data);
-                
-                // Log detailed error for debugging
-                console.error('Error details:', {
-                    status: error.status,
-                    text: error.text,
-                    message: error.message
-                });
-            }
-        } else {
-            // EmailJS not available, use mailto fallback
-            console.log('📧 EmailJS not available, using mailto fallback');
-            this.showToastWithFallback('خدمة البريد الإلكتروني غير متاحة حالياً', data);
+            }, 2000);
+            
+        } catch (error) {
+            console.error('❌ Error opening mailto:', error);
+            this.showToast('حدث خطأ في فتح برنامج البريد الإلكتروني', 'error');
         }
         
         // Restore button state
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
     }
+
 
     // Mobile Menu
     setupMobileMenu() {
@@ -891,48 +846,6 @@ class AhmedPortfolio {
         }, 4000);
     }
 
-    showToastWithFallback(message, data) {
-        let container = document.getElementById('toastContainer');
-        
-        if (!container) {
-            container = document.createElement('div');
-            container.id = 'toastContainer';
-            container.className = 'toast-container';
-            document.body.appendChild(container);
-        }
-        
-        const toast = document.createElement('div');
-        toast.className = 'toast error';
-        
-        // Create mailto link as fallback
-        const subject = encodeURIComponent(data.subject);
-        const body = encodeURIComponent(`الاسم: ${data.from_name}\nالبريد الإلكتروني: ${data.from_email}\n\nالرسالة:\n${data.message}`);
-        const mailtoLink = `mailto:zaiddzaid666@gmail.com?subject=${subject}&body=${body}`;
-        
-        toast.innerHTML = `
-            <i class="fas fa-exclamation-circle"></i>
-            <div style="flex: 1;">
-                <div style="margin-bottom: 8px;">${message}</div>
-                <a href="${mailtoLink}" style="color: var(--portfolio-primary); text-decoration: underline; font-size: 0.9em;">
-                    اضغط هنا لإرسال الرسالة عبر البريد الإلكتروني
-                </a>
-            </div>
-        `;
-        
-        container.appendChild(toast);
-        
-        // Auto remove after 8 seconds (longer for fallback)
-        setTimeout(() => {
-            if (toast.parentNode) {
-                toast.style.animation = 'slideInLeft 0.3s ease-out reverse';
-                setTimeout(() => {
-                    if (toast.parentNode) {
-                        toast.remove();
-                    }
-                }, 300);
-            }
-        }, 8000);
-    }
 }
 
 // Global functions for HTML onclick handlers
@@ -948,37 +861,6 @@ function closeProjectModal() {
     }
 }
 
-function testContactForm() {
-    console.log('🧪 Testing contact form...');
-    
-    const form = document.getElementById('contactForm');
-    if (!form) {
-        console.error('❌ Contact form not found');
-        alert('النموذج غير موجود!');
-        return;
-    }
-    
-    // Fill form with test data
-    const nameInput = form.querySelector('#name');
-    const emailInput = form.querySelector('#email');
-    const subjectInput = form.querySelector('#subject');
-    const messageInput = form.querySelector('#message');
-    
-    if (nameInput) nameInput.value = 'اختبار';
-    if (emailInput) emailInput.value = 'test@example.com';
-    if (subjectInput) subjectInput.value = 'اختبار النموذج';
-    if (messageInput) messageInput.value = 'هذه رسالة اختبار للنموذج';
-    
-    console.log('✅ Test data filled');
-    
-    // Test form submission
-    if (window.portfolio) {
-        window.portfolio.handleFormSubmit(form);
-    } else {
-        console.error('❌ Portfolio instance not found');
-        alert('خطأ في تحميل التطبيق!');
-    }
-}
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
@@ -988,7 +870,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Make functions globally available
     window.openProjectModal = openProjectModal;
     window.closeProjectModal = closeProjectModal;
-    window.testContactForm = testContactForm;
     
     console.log('🎉 Portfolio ready!');
 });
