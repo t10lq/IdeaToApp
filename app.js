@@ -540,7 +540,24 @@ class AhmedPortfolio {
         
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            this.handleFormSubmit(form);
+            
+            // Validate form first
+            const inputs = form.querySelectorAll('.form-control');
+            let isFormValid = true;
+            
+            inputs.forEach(input => {
+                if (!this.validateField(input)) {
+                    isFormValid = false;
+                }
+            });
+            
+            if (!isFormValid) {
+                this.showToast('يرجى تصحيح الأخطاء في النموذج', 'error');
+                return;
+            }
+            
+            // Submit to Formspree
+            this.submitToFormspree(form);
         });
         
         // Real-time validation
@@ -692,6 +709,51 @@ class AhmedPortfolio {
         // Restore button state
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
+    }
+
+    async submitToFormspree(form) {
+        console.log('📧 Submitting to Formspree...');
+        
+        // Show loading state
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+        submitBtn.disabled = true;
+        
+        try {
+            // Get form data
+            const formData = new FormData(form);
+            
+            // Submit to Formspree
+            const response = await fetch('https://formspree.io/f/xpwnqkqg', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
+                form.reset();
+            } else {
+                const data = await response.json();
+                if (data.errors) {
+                    this.showToast('حدث خطأ في إرسال الرسالة. يرجى المحاولة مرة أخرى', 'error');
+                } else {
+                    this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
+                    form.reset();
+                }
+            }
+            
+        } catch (error) {
+            console.error('❌ Formspree submission error:', error);
+            this.showToast('حدث خطأ في إرسال الرسالة. يرجى المحاولة مرة أخرى', 'error');
+        } finally {
+            // Restore button state
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }
     }
 
     showContactInfo(data) {
