@@ -677,7 +677,27 @@ class AhmedPortfolio {
             }
         } catch (error) {
             console.log('❌ EmailJS failed:', error);
-            this.showToast('حدث خطأ في الإرسال، يرجى المحاولة مرة أخرى', 'error');
+            console.log('🔍 Error details:', {
+                message: error.message,
+                status: error.status,
+                text: error.text
+            });
+            
+            // Show specific error message
+            let errorMessage = 'حدث خطأ في الإرسال، يرجى المحاولة مرة أخرى';
+            if (error.status === 400) {
+                errorMessage = 'خطأ في البيانات المرسلة، يرجى التحقق من المعلومات';
+            } else if (error.status === 401) {
+                errorMessage = 'خطأ في المصادقة، يرجى المحاولة لاحقاً';
+            } else if (error.status === 403) {
+                errorMessage = 'تم رفض الطلب، يرجى المحاولة لاحقاً';
+            } else if (error.status === 404) {
+                errorMessage = 'الخدمة غير متاحة، يرجى المحاولة لاحقاً';
+            } else if (error.status >= 500) {
+                errorMessage = 'خطأ في الخادم، يرجى المحاولة لاحقاً';
+            }
+            
+            this.showToast(errorMessage, 'error');
             this.showContactInfo(data);
         } finally {
             // Always restore button state - this is critical!
@@ -689,18 +709,29 @@ class AhmedPortfolio {
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
             
-            // Additional force restore
+            // Force DOM update
+            submitBtn.style.display = 'none';
+            submitBtn.offsetHeight; // Trigger reflow
+            submitBtn.style.display = '';
+            
+            // Additional force restore attempts
             setTimeout(() => {
-                console.log('🔄 Additional restore attempt...');
+                console.log('🔄 Additional restore attempt (100ms)...');
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
             }, 100);
             
             setTimeout(() => {
-                console.log('🔄 Final restore attempt...');
+                console.log('🔄 Final restore attempt (500ms)...');
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
             }, 500);
+            
+            setTimeout(() => {
+                console.log('🔄 Ultimate restore attempt (1000ms)...');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 1000);
             
             console.log('✅ Button state restored in finally block');
         }
@@ -714,6 +745,21 @@ class AhmedPortfolio {
             submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
             submitBtn.disabled = false;
             console.log('✅ Button manually restored');
+        }
+    };
+    
+    // Emergency button restore function
+    window.emergencyRestore = function() {
+        console.log('🚨 Emergency button restoration...');
+        const submitBtn = document.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            // Force restore
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
+            submitBtn.disabled = false;
+            submitBtn.style.display = 'none';
+            submitBtn.offsetHeight;
+            submitBtn.style.display = '';
+            console.log('✅ Emergency restore completed');
         }
     };
 

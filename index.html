@@ -717,5 +717,25 @@
         })();
     </script>
     <script src="app.js"></script>
+    
+    <!-- Emergency Functions -->
+    <script>
+        // Emergency button restore function
+        function emergencyRestore() {
+            console.log('🚨 Emergency button restoration...');
+            const submitBtn = document.querySelector('button[type="submit"]');
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
+                submitBtn.disabled = false;
+                submitBtn.style.display = 'none';
+                submitBtn.offsetHeight;
+                submitBtn.style.display = '';
+                console.log('✅ Emergency restore completed');
+            }
+        }
+        
+        // Make function globally available
+        window.emergencyRestore = emergencyRestore;
+    </script>
 </body>
 </html>
