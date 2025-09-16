@@ -682,8 +682,26 @@ class AhmedPortfolio {
         } finally {
             // Always restore button state - this is critical!
             console.log('🔄 Restoring button state in finally block...');
+            console.log('🔍 Original text:', originalText);
+            console.log('🔍 Submit button:', submitBtn);
+            
+            // Force restore with multiple methods
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
+            
+            // Additional force restore
+            setTimeout(() => {
+                console.log('🔄 Additional restore attempt...');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 100);
+            
+            setTimeout(() => {
+                console.log('🔄 Final restore attempt...');
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 500);
+            
             console.log('✅ Button state restored in finally block');
         }
     }
@@ -909,5 +927,7 @@ window.addEventListener('load', () => {
 });
 
 console.log('🚀 Ahmed Ibrahim Portfolio - Professional Web Developer & UI/UX Designer - Navigation Fixed!');/ /   F o r c e   c a c h e   b u s t   -   0 9 / 1 6 / 2 0 2 5   1 4 : 3 4 : 1 6 
+ 
+ / /   T e s t i n g   b u t t o n   r e s t o r a t i o n   -   0 9 / 1 6 / 2 0 2 5   1 4 : 4 7 : 1 2 
  
  
