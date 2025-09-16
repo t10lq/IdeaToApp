@@ -749,11 +749,15 @@ class AhmedPortfolio {
                 if (result.status === 200) {
                     this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
                     form.reset();
+                    // Restore button state after successful submission
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
                     return;
                 }
             }
         } catch (error) {
             console.log('❌ EmailJS failed:', error);
+            this.showToast('حدث خطأ في الإرسال، يرجى المحاولة مرة أخرى', 'error');
         }
         
         // Show contact information as fallback
