@@ -733,6 +733,10 @@ class AhmedPortfolio {
         
         // Try Formspree first
         try {
+            // Add additional data to formData
+            formData.append('_subject', 'رسالة جديدة من موقع المحفظة الشخصية - اسامة زيد ذياب');
+            formData.append('_cc', 'zaiddzaid666@gmail.com');
+            
             const response = await fetch('https://formspree.io/f/xpwnqkqg', {
                 method: 'POST',
                 body: formData,
@@ -745,34 +749,37 @@ class AhmedPortfolio {
                 this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
                 form.reset();
                 return;
+            } else {
+                const errorData = await response.json();
+                console.log('Formspree error:', errorData);
             }
         } catch (error) {
-            console.log('❌ Formspree failed, trying alternative...');
+            console.log('❌ Formspree failed, trying alternative...', error);
         }
         
-        // Try alternative service
+        // Try EmailJS as alternative
         try {
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    access_key: 'YOUR_ACCESS_KEY', // You'll need to get this from web3forms.com
-                    name: data.name,
-                    email: data.email,
-                    subject: data.subject,
-                    message: data.message
-                })
-            });
-            
-            if (response.ok) {
-                this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
-                form.reset();
-                return;
+            if (typeof emailjs !== 'undefined') {
+                const result = await emailjs.send(
+                    'service_2qpq3wr',
+                    'template_6qso35c',
+                    {
+                        from_name: data.name,
+                        from_email: data.email,
+                        subject: data.subject,
+                        message: data.message,
+                        to_email: 'zaiddzaid666@gmail.com'
+                    }
+                );
+                
+                if (result.status === 200) {
+                    this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
+                    form.reset();
+                    return;
+                }
             }
         } catch (error) {
-            console.log('❌ Alternative service failed');
+            console.log('❌ EmailJS failed:', error);
         }
         
         // Show contact information instead of mailto

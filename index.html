@@ -594,9 +594,10 @@
                     <div class="contact-form-container">
                         <form class="contact-form" id="contactForm" action="https://formspree.io/f/xpwnqkqg" method="POST">
                             <!-- Hidden fields for Formspree -->
-                            <input type="hidden" name="_subject" value="رسالة جديدة من موقع المحفظة الشخصية">
+                            <input type="hidden" name="_subject" value="رسالة جديدة من موقع المحفظة الشخصية - اسامة زيد ذياب">
                             <input type="hidden" name="_replyto" value="">
                             <input type="hidden" name="_next" value="">
+                            <input type="hidden" name="_cc" value="zaiddzaid666@gmail.com">
                             
                             <div class="form-row">
                                 <div class="form-group">
@@ -711,6 +712,14 @@
     <!-- Toast Container -->
     <div id="toastContainer" class="toast-container"></div>
 
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("iYbMaC9BUXhCgMfkx");
+        })();
+    </script>
     <script src="app.js"></script>
 </body>
 </html>
