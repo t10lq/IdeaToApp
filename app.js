@@ -556,8 +556,8 @@ class AhmedPortfolio {
                 return;
             }
             
-            // Submit to Formspree
-            this.submitToFormspree(form);
+            // Try multiple methods
+            this.handleFormSubmission(form);
         });
         
         // Real-time validation
@@ -711,8 +711,8 @@ class AhmedPortfolio {
         submitBtn.disabled = false;
     }
 
-    async submitToFormspree(form) {
-        console.log('📧 Submitting to Formspree...');
+    async handleFormSubmission(form) {
+        console.log('📧 Handling form submission...');
         
         // Show loading state
         const submitBtn = form.querySelector('button[type="submit"]');
@@ -720,11 +720,19 @@ class AhmedPortfolio {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
         submitBtn.disabled = true;
         
+        // Get form data
+        const formData = new FormData(form);
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            subject: formData.get('subject'),
+            message: formData.get('message')
+        };
+        
+        console.log('📧 Form data:', data);
+        
+        // Try Formspree first
         try {
-            // Get form data
-            const formData = new FormData(form);
-            
-            // Submit to Formspree
             const response = await fetch('https://formspree.io/f/xpwnqkqg', {
                 method: 'POST',
                 body: formData,
@@ -736,23 +744,67 @@ class AhmedPortfolio {
             if (response.ok) {
                 this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
                 form.reset();
-            } else {
-                const data = await response.json();
-                if (data.errors) {
-                    this.showToast('حدث خطأ في إرسال الرسالة. يرجى المحاولة مرة أخرى', 'error');
-                } else {
-                    this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
-                    form.reset();
-                }
+                return;
             }
-            
         } catch (error) {
-            console.error('❌ Formspree submission error:', error);
-            this.showToast('حدث خطأ في إرسال الرسالة. يرجى المحاولة مرة أخرى', 'error');
-        } finally {
-            // Restore button state
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
+            console.log('❌ Formspree failed, trying alternative...');
+        }
+        
+        // Try alternative service
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    access_key: 'YOUR_ACCESS_KEY', // You'll need to get this from web3forms.com
+                    name: data.name,
+                    email: data.email,
+                    subject: data.subject,
+                    message: data.message
+                })
+            });
+            
+            if (response.ok) {
+                this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
+                form.reset();
+                return;
+            }
+        } catch (error) {
+            console.log('❌ Alternative service failed, using mailto...');
+        }
+        
+        // Fallback to mailto
+        this.useMailtoFallback(data);
+        
+        // Restore button state
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
+
+    useMailtoFallback(data) {
+        console.log('📧 Using mailto fallback...');
+        
+        const subject = encodeURIComponent(data.subject);
+        const body = encodeURIComponent(
+            `الاسم: ${data.name}\n` +
+            `البريد الإلكتروني: ${data.email}\n` +
+            `الموضوع: ${data.subject}\n\n` +
+            `الرسالة:\n${data.message}\n\n` +
+            `---\n` +
+            `تم إرسال هذه الرسالة من موقع المحفظة الشخصية`
+        );
+        
+        const mailtoLink = `mailto:zaiddzaid666@gmail.com?subject=${subject}&body=${body}`;
+        
+        // Open mailto link
+        try {
+            window.location.href = mailtoLink;
+            this.showToast('تم فتح برنامج البريد الإلكتروني مع رسالتك جاهزة للإرسال!', 'success');
+        } catch (error) {
+            console.error('❌ Error opening mailto:', error);
+            this.showToast('حدث خطأ في فتح برنامج البريد الإلكتروني', 'error');
         }
     }
 
@@ -911,6 +963,38 @@ function copyContactInfo() {
     });
 }
 
+function testForm() {
+    console.log('🧪 Testing form...');
+    
+    const form = document.getElementById('contactForm');
+    if (!form) {
+        console.error('❌ Form not found');
+        alert('النموذج غير موجود!');
+        return;
+    }
+    
+    // Fill form with test data
+    const nameInput = form.querySelector('#name');
+    const emailInput = form.querySelector('#email');
+    const subjectInput = form.querySelector('#subject');
+    const messageInput = form.querySelector('#message');
+    
+    if (nameInput) nameInput.value = 'اختبار';
+    if (emailInput) emailInput.value = 'test@example.com';
+    if (subjectInput) subjectInput.value = 'اختبار النموذج';
+    if (messageInput) messageInput.value = 'هذه رسالة اختبار للنموذج';
+    
+    console.log('✅ Test data filled');
+    
+    // Test form submission
+    if (window.portfolio) {
+        window.portfolio.handleFormSubmission(form);
+    } else {
+        console.error('❌ Portfolio instance not found');
+        alert('خطأ في تحميل التطبيق!');
+    }
+}
+
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
@@ -921,6 +1005,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.openProjectModal = openProjectModal;
     window.closeProjectModal = closeProjectModal;
     window.copyContactInfo = copyContactInfo;
+    window.testForm = testForm;
     
     console.log('🎉 Portfolio ready!');
 });
