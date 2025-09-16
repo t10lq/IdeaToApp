@@ -644,8 +644,23 @@ class AhmedPortfolio {
         // Show loading state
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
+        
+        // Store original state
+        window.originalButtonText = originalText;
+        window.submitButton = submitBtn;
+        
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
         submitBtn.disabled = true;
+        
+        // Create a function to restore button
+        const restoreButton = () => {
+            console.log('🔄 Restoring button state...');
+            if (window.submitButton && window.originalButtonText) {
+                window.submitButton.innerHTML = window.originalButtonText;
+                window.submitButton.disabled = false;
+                console.log('✅ Button state restored');
+            }
+        };
         
         try {
             // Try EmailJS
@@ -679,37 +694,28 @@ class AhmedPortfolio {
             console.log('❌ EmailJS failed:', error);
             this.showToast('حدث خطأ في الإرسال، يرجى المحاولة مرة أخرى', 'error');
             this.showContactInfo(data);
-        } finally {
-            // Always restore button state - this is critical!
-            console.log('🔄 Restoring button state...');
-            
-            // Force immediate restoration
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
-            
-            // Force DOM update
-            submitBtn.style.display = 'none';
-            submitBtn.offsetHeight; // Trigger reflow
-            submitBtn.style.display = '';
-            
-            // Additional restoration attempts
-            setTimeout(() => {
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-                console.log('✅ Button state restored (delayed)');
-            }, 10);
-            
-            setTimeout(() => {
-                if (submitBtn.disabled || submitBtn.innerHTML.includes('جاري الإرسال')) {
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
-                    console.log('🔧 Button state force restored');
-                }
-            }, 100);
-            
-            console.log('✅ Button state restored');
         }
+        
+        // Always restore button - multiple attempts
+        restoreButton();
+        
+        // Additional attempts
+        setTimeout(restoreButton, 50);
+        setTimeout(restoreButton, 100);
+        setTimeout(restoreButton, 200);
+        setTimeout(restoreButton, 500);
     }
+
+    // Global function to manually restore button (for debugging)
+    window.restoreSubmitButton = function() {
+        console.log('🔧 Manual button restoration...');
+        const submitBtn = document.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
+            submitBtn.disabled = false;
+            console.log('✅ Button manually restored');
+        }
+    };
 
 
     showContactInfo(data) {
