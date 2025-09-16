@@ -736,6 +736,7 @@ class AhmedPortfolio {
         // Try EmailJS
         try {
             if (typeof emailjs !== 'undefined') {
+                console.log('📧 Attempting EmailJS send...');
                 const result = await emailjs.send(
                     'service_2qpq3wr',
                     'template_6qso35c',
@@ -748,11 +749,18 @@ class AhmedPortfolio {
                     }
                 );
                 
+                console.log('📧 EmailJS result:', result);
+                
                 if (result.status === 200) {
+                    console.log('✅ Email sent successfully!');
                     this.showToast('تم إرسال رسالتك بنجاح! سأتواصل معك قريباً', 'success');
                     form.reset();
                     emailSent = true;
+                } else {
+                    console.log('❌ EmailJS returned non-200 status:', result.status);
                 }
+            } else {
+                console.log('❌ EmailJS not available');
             }
         } catch (error) {
             console.log('❌ EmailJS failed:', error);
@@ -761,12 +769,20 @@ class AhmedPortfolio {
         
         // If email didn't send successfully, show contact info
         if (!emailSent) {
+            console.log('📧 Showing contact info as fallback');
             this.showContactInfo(data);
         }
         
-        // Always restore button state
+        // Always restore button state - this is critical!
+        console.log('🔄 Restoring button state...');
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
+        
+        // Force a small delay to ensure UI updates
+        setTimeout(() => {
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        }, 100);
     }
 
 
