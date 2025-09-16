@@ -682,8 +682,31 @@ class AhmedPortfolio {
         } finally {
             // Always restore button state - this is critical!
             console.log('🔄 Restoring button state...');
+            
+            // Force immediate restoration
             submitBtn.innerHTML = originalText;
             submitBtn.disabled = false;
+            
+            // Force DOM update
+            submitBtn.style.display = 'none';
+            submitBtn.offsetHeight; // Trigger reflow
+            submitBtn.style.display = '';
+            
+            // Additional restoration attempts
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                console.log('✅ Button state restored (delayed)');
+            }, 10);
+            
+            setTimeout(() => {
+                if (submitBtn.disabled || submitBtn.innerHTML.includes('جاري الإرسال')) {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    console.log('🔧 Button state force restored');
+                }
+            }, 100);
+            
             console.log('✅ Button state restored');
         }
     }
@@ -897,4 +920,6 @@ window.addEventListener('load', () => {
     }
 });
 
-console.log('🚀 Ahmed Ibrahim Portfolio - Professional Web Developer & UI/UX Designer - Navigation Fixed!');
+console.log('🚀 Ahmed Ibrahim Portfolio - Professional Web Developer & UI/UX Designer - Navigation Fixed!');/ /   F o r c e   c a c h e   b u s t   -   0 9 / 1 6 / 2 0 2 5   1 4 : 3 4 : 1 6 
+ 
+ 
