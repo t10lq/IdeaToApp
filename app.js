@@ -9,7 +9,7 @@ class AhmedPortfolio {
                     title: "EverPic",
                     description: "أداة برمجية تقوم بتحويل أي صورة بأي صيغة إلى رابط مباشر قابل للاستخدام في المواقع والتطبيقات، مما يسهل مشاركة الصور على الإنترنت دون الحاجة إلى رفعها بشكل تقليدي.",
                     category: "تطوير ويب",
-                    image: "images/everpic-project.jpg",
+                    image: "images/links-app.png",
                     link: "https://everpic-plus.preview.emergentagent.com/",
                     tech: ["Python", "Flask / FastAPI", "HTML / CSS / JavaScript", "Amazon S3"],
                     features: [
@@ -25,7 +25,7 @@ class AhmedPortfolio {
                     title: "منصة التجارة الإلكترونية – TURBO STORE",
                     description: "متجر إلكتروني متكامل متخصص في بيع اشتراكات الألعاب الرقمية مثل Xbox Game Pass Ultimate، مع قسم للألعاب الرقمية وسلة ذكية تحفظ المنتجات.",
                     category: "تطوير ويب",
-                    image: "images/turbo-store-project.jpg",
+                    image: "images/turbo-store.png",
                     link: "https://turbo-store-8b47e.web.app/",
                     status: "قيد التطوير",
                     tech: ["HTML", "CSS", "JavaScript (React)", "Node.js", "MongoDB", "Stripe API"],
@@ -42,30 +42,7 @@ class AhmedPortfolio {
                     results: "تسهيل شراء الاشتراكات والألعاب الرقمية، زيادة رضا العملاء، وتحسين سرعة واستقرار عملية الشراء"
                 }
             ],
-            testimonials: [
-                {
-                    name: "سارة أحمد",
-                    position: "مدير التسويق - شركة النجاح",
-                    text: "عمل اسامة زيد ذياب على تطوير موقعنا الإلكتروني كان استثنائياً. التصميم جميل والأداء سريع جداً. فريقنا والعملاء معجبون بالنتيجة.",
-                    image: "images/testimonial1.jpg",
-                    rating: 5
-                },
-                {
-                    name: "محمد الخالدي",
-                    position: "مؤسس - متجر التقنية",
-                    text: "تطبيق التجارة الإلكترونية الذي طوّره اسامة زيد ذياب زاد من مبيعاتنا بنسبة 200%. التطبيق سهل الاستخدام وآمن تماماً.",
-                    image: "images/testimonial2.jpg",
-                    rating: 5
-                },
-                {
-                    name: "نور الإبراهيم",
-                    position: "مديرة المشاريع - شركة الإبداع",
-                    text: "التعامل مع اسامة زيد ذياب كان ممتازاً. يلتزم بالمواعيد ويقدم جودة عالية. أنصح بالتعامل معه لأي مشروع تقني.",
-                    image: "images/testimonial3.jpg",
-                    rating: 5
-                }
-            ],
-            currentTestimonial: 0,
+            testimonials: [],
             typingTexts: [
                 "مطور ويب محترف",
                 "مصمم UI/UX مبدع", 
@@ -101,7 +78,6 @@ class AhmedPortfolio {
         this.setupScrollAnimations();
         this.setupSkillsAnimation();
         this.setupProjectsFilter();
-        this.setupTestimonialsCarousel();
         this.setupContactForm();
         this.setupMobileMenu();
         
@@ -549,74 +525,6 @@ class AhmedPortfolio {
         }
     }
 
-    // Testimonials Carousel
-    setupTestimonialsCarousel() {
-        this.createTestimonialDots();
-        this.setupCarouselControls();
-        this.startAutoSlide();
-    }
-
-    createTestimonialDots() {
-        const dotsContainer = document.getElementById('testimonialDots');
-        if (!dotsContainer) return;
-        
-        dotsContainer.innerHTML = '';
-        
-        this.data.testimonials.forEach((_, index) => {
-            const dot = document.createElement('div');
-            dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
-            dot.addEventListener('click', () => this.goToTestimonial(index));
-            dotsContainer.appendChild(dot);
-        });
-    }
-
-    setupCarouselControls() {
-        const prevBtn = document.getElementById('prevTestimonial');
-        const nextBtn = document.getElementById('nextTestimonial');
-        
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => this.previousTestimonial());
-        }
-        
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => this.nextTestimonial());
-        }
-    }
-
-    goToTestimonial(index) {
-        const testimonials = document.querySelectorAll('.testimonial-card');
-        const dots = document.querySelectorAll('.carousel-dot');
-        
-        // Update testimonials
-        testimonials.forEach((testimonial, i) => {
-            testimonial.classList.toggle('active', i === index);
-        });
-        
-        // Update dots
-        dots.forEach((dot, i) => {
-            dot.classList.toggle('active', i === index);
-        });
-        
-        this.data.currentTestimonial = index;
-    }
-
-    nextTestimonial() {
-        const nextIndex = (this.data.currentTestimonial + 1) % this.data.testimonials.length;
-        this.goToTestimonial(nextIndex);
-    }
-
-    previousTestimonial() {
-        const prevIndex = this.data.currentTestimonial === 0 
-            ? this.data.testimonials.length - 1 
-            : this.data.currentTestimonial - 1;
-        this.goToTestimonial(prevIndex);
-    }
-
-    startAutoSlide() {
-        setInterval(() => {
-            this.nextTestimonial();
-        }, 5000);
-    }
 
     // Contact Form
     setupContactForm() {
