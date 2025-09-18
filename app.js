@@ -1,5 +1,6 @@
 // Ahmed Ibrahim Portfolio - Modern JavaScript Application
 // Professional Portfolio with Arabic RTL Support - FIXED Navigation
+// Cache busting - Updated: 2025-01-16
 
 class OsamaPortfolio {
     constructor() {
