@@ -346,7 +346,7 @@ h6 {
   line-height: var(--line-height-tight);
   color: var(--color-text);
   letter-spacing: var(--letter-spacing-tight);
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
@@ -371,7 +371,7 @@ h6 {
 
 p {
   margin: 0 0 var(--space-16) 0;
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
@@ -806,7 +806,7 @@ html {
 body {
   font-family: 'Cairo', var(--font-family-base);
   direction: rtl;
-  text-align: right;
+  text-align: end;
   line-height: var(--line-height-normal);
   overflow-x: hidden;
 }
@@ -850,7 +850,7 @@ body {
 .footer-brand,
 .footer-links,
 .footer-contact {
-  text-align: right;
+  text-align: end;
 }
 
 /* Additional center aligned elements */
@@ -881,7 +881,7 @@ body {
 .skill-info,
 .skill-name,
 .skill-percentage {
-  text-align: right;
+  text-align: end;
 }
 
 /* Navigation and buttons */
@@ -898,7 +898,7 @@ body {
 .form-control,
 .form-label,
 .form-error {
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
@@ -906,13 +906,13 @@ body {
 .modal-content,
 .modal-body {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 /* Toast messages */
 .toast {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 /* Loading Screen */
@@ -1137,7 +1137,7 @@ body {
   background: var(--gradient-hero);
   overflow: hidden;
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .hero-background {
@@ -1201,7 +1201,7 @@ body {
   position: relative;
   z-index: 2;
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .hero-greeting {
@@ -1209,7 +1209,7 @@ body {
   color: var(--color-text-secondary);
   margin-block-end: var(--space-8);
   animation: fadeInUp 0.8s ease-out;
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
@@ -1222,7 +1222,7 @@ body {
   background-clip: text;
   margin: 0 0 var(--space-16) 0;
   animation: fadeInUp 0.8s ease-out 0.2s both;
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
@@ -1233,7 +1233,7 @@ body {
   margin-block-end: var(--space-24);
   min-block-size: 40px;
   animation: fadeInUp 0.8s ease-out 0.4s both;
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
@@ -1365,8 +1365,8 @@ body {
   block-size: 4px;
   background: var(--gradient-primary);
   border-radius: var(--radius-sm);
-  left: 50%;
-  right: auto;
+  inset-inline-start: 50%;
+  inset-inline-end: auto;
 }
 
 .section-subtitle {
@@ -1381,7 +1381,7 @@ body {
   padding: var(--space-32) 0;
   background: var(--color-bg-2);
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .about-content {
@@ -1402,7 +1402,7 @@ body {
   color: var(--color-text-secondary);
   line-height: 1.8;
   margin-block-end: var(--space-16);
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
@@ -1412,7 +1412,7 @@ body {
 
 .about-actions {
   margin: var(--space-24) 0;
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
@@ -1840,7 +1840,7 @@ body {
   border-radius: 0 var(--radius-lg) 0 var(--radius-lg);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
-  text-align: right;
+  text-align: end;
   direction: rtl;
 }
 
@@ -2724,7 +2724,7 @@ body {
   }
   
   .hero-actions .btn {
-    width: 100%;
+    inline-size: 100%;
     justify-content: center;
   }
   
@@ -2768,7 +2768,7 @@ body {
   }
   
   .filter-btn {
-    width: 100%;
+    inline-size: 100%;
     text-align: center;
   }
   
@@ -2863,7 +2863,7 @@ body {
 
 .footer-content {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .about-text,
@@ -2875,7 +2875,7 @@ body {
 
 .info-item {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .timeline-content {
@@ -2887,7 +2887,7 @@ body {
 .timeline-content h4,
 .timeline-content p {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .project-content {
@@ -2899,7 +2899,7 @@ body {
 .project-description,
 .project-category {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .service-title,
@@ -2910,7 +2910,7 @@ body {
 
 .service-features {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .contact-info {
@@ -2922,21 +2922,21 @@ body {
 .contact-details h4,
 .contact-details p {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 .footer-brand,
 .footer-links,
 .footer-contact {
   direction: rtl;
-  text-align: right;
+  text-align: end;
 }
 
 /* Ensure all Arabic text is properly aligned */
 [lang="ar"],
 .arabic-text {
   direction: rtl;
-  text-align: right;
+  text-align: end;
   unicode-bidi: embed;
 }
 
@@ -2957,7 +2957,7 @@ body {
 .hero-title,
 .hero-description {
   direction: rtl !important;
-  text-align: right !important;
+  text-align: end !important;
 }
 
 .timeline-content,
@@ -2971,5 +2971,5 @@ body {
 .footer-links a,
 .footer-contact-item {
   direction: rtl !important;
-  text-align: right !important;
+  text-align: end !important;
 }
