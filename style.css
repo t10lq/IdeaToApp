@@ -346,6 +346,8 @@ h6 {
   line-height: var(--line-height-tight);
   color: var(--color-text);
   letter-spacing: var(--letter-spacing-tight);
+  text-align: right;
+  direction: rtl;
 }
 
 h1 {
@@ -369,6 +371,8 @@ h6 {
 
 p {
   margin: 0 0 var(--space-16) 0;
+  text-align: right;
+  direction: rtl;
 }
 
 a {
@@ -796,14 +800,119 @@ select.form-control {
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  direction: rtl;
 }
 
 body {
   font-family: 'Cairo', var(--font-family-base);
   direction: rtl;
-  text-align: end;
+  text-align: right;
   line-height: var(--line-height-normal);
   overflow-x: hidden;
+}
+
+/* RTL Fixes for all text elements */
+* {
+  direction: rtl;
+}
+
+/* Center aligned elements */
+.section-header,
+.section-tag,
+.section-title,
+.section-subtitle,
+.loading-text,
+.hero-actions,
+.hero-stats,
+.stat-item,
+.stat-label,
+.service-card,
+.project-card,
+.timeline-date,
+.service-features {
+  text-align: center;
+}
+
+/* Right aligned elements for RTL */
+.contact-form,
+.form-group,
+.form-label,
+.form-control,
+.timeline-content,
+.timeline-skills,
+.skill-category h3,
+.skill-info,
+.skill-name,
+.skill-percentage,
+.project-tech,
+.tech-tag,
+.footer-content,
+.footer-brand,
+.footer-links,
+.footer-contact {
+  text-align: right;
+}
+
+/* Additional center aligned elements */
+.about-content,
+.about-text,
+.about-intro,
+.about-info,
+.timeline-content,
+.timeline-content h3,
+.timeline-content h4,
+.timeline-content p,
+.project-content,
+.project-title,
+.project-description,
+.project-category,
+.service-title,
+.service-description,
+.contact-info,
+.contact-details,
+.contact-details h4,
+.contact-details p {
+  text-align: center;
+}
+
+/* Right aligned for specific elements */
+.project-tech,
+.tech-tag,
+.skill-info,
+.skill-name,
+.skill-percentage {
+  text-align: right;
+}
+
+/* Navigation and buttons */
+.nav-menu,
+.nav-link,
+.btn,
+.filter-btn,
+.project-btn,
+.carousel-btn {
+  direction: rtl;
+}
+
+/* Form elements */
+.form-control,
+.form-label,
+.form-error {
+  text-align: right;
+  direction: rtl;
+}
+
+/* Modal content */
+.modal-content,
+.modal-body {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Toast messages */
+.toast {
+  direction: rtl;
+  text-align: right;
 }
 
 /* Loading Screen */
@@ -851,15 +960,22 @@ body {
   color: white;
 }
 
+.loading-text {
+  text-align: center;
+  direction: rtl;
+}
+
 .loading-text h2 {
   font-size: var(--font-size-2xl);
   color: var(--color-text);
   margin-block-end: var(--space-8);
+  text-align: center;
 }
 
 .loading-text p {
   color: var(--color-text-secondary);
   margin: 0;
+  text-align: center;
 }
 
 .loading-progress {
@@ -1020,6 +1136,8 @@ body {
   padding: 120px 0 var(--space-32);
   background: var(--gradient-hero);
   overflow: hidden;
+  direction: rtl;
+  text-align: right;
 }
 
 .hero-background {
@@ -1082,6 +1200,8 @@ body {
   margin: 0 auto;
   position: relative;
   z-index: 2;
+  direction: rtl;
+  text-align: right;
 }
 
 .hero-greeting {
@@ -1089,6 +1209,8 @@ body {
   color: var(--color-text-secondary);
   margin-block-end: var(--space-8);
   animation: fadeInUp 0.8s ease-out;
+  text-align: right;
+  direction: rtl;
 }
 
 .hero-name {
@@ -1100,6 +1222,8 @@ body {
   background-clip: text;
   margin: 0 0 var(--space-16) 0;
   animation: fadeInUp 0.8s ease-out 0.2s both;
+  text-align: right;
+  direction: rtl;
 }
 
 .hero-title {
@@ -1109,6 +1233,8 @@ body {
   margin-block-end: var(--space-24);
   min-block-size: 40px;
   animation: fadeInUp 0.8s ease-out 0.4s both;
+  text-align: right;
+  direction: rtl;
 }
 
 .typing-text {
@@ -1203,8 +1329,9 @@ body {
 
 /* Section Headers */
 .section-header {
-  text-align: center;
+  text-align: center !important;
   margin-block-end: var(--space-32);
+  direction: rtl;
 }
 
 .section-tag {
@@ -1231,13 +1358,15 @@ body {
 .section-title::after {
   content: '';
   position: absolute;
-  inset-block-end: -8px;
-  inset-inline-end: 50%;
-  transform: translateX(50%);
+  inset-block-end: -12px;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
   inline-size: 60px;
   block-size: 4px;
   background: var(--gradient-primary);
   border-radius: var(--radius-sm);
+  left: 50%;
+  right: auto;
 }
 
 .section-subtitle {
@@ -1251,6 +1380,8 @@ body {
 .about-section {
   padding: var(--space-32) 0;
   background: var(--color-bg-2);
+  direction: rtl;
+  text-align: right;
 }
 
 .about-content {
@@ -1271,10 +1402,18 @@ body {
   color: var(--color-text-secondary);
   line-height: 1.8;
   margin-block-end: var(--space-16);
+  text-align: right;
+  direction: rtl;
 }
 
 .about-info {
   margin: var(--space-24) 0;
+}
+
+.about-actions {
+  margin: var(--space-24) 0;
+  text-align: right;
+  direction: rtl;
 }
 
 .info-item {
@@ -1701,6 +1840,8 @@ body {
   border-radius: 0 var(--radius-lg) 0 var(--radius-lg);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
+  text-align: right;
+  direction: rtl;
 }
 
 .service-icon {
@@ -2116,10 +2257,13 @@ body {
   padding-block-start: var(--space-16);
   border-block-start: 1px solid var(--color-border);
   color: var(--color-text-secondary);
+  direction: rtl;
 }
 
 .footer-bottom p {
   margin: var(--space-4) 0;
+  text-align: center;
+  direction: rtl;
 }
 
 .footer-bottom i {
@@ -2357,6 +2501,7 @@ body {
 }
 
 @media (max-width: 768px) {
+  /* Navigation */
   .nav-menu {
     display: none;
     position: absolute;
@@ -2392,58 +2537,439 @@ body {
     transform: rotate(-45deg) translate(6px, -6px);
   }
   
+  /* Hero Section */
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: var(--space-24);
+  }
+  
   .hero-stats {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-16);
   }
   
   .hero-actions {
     flex-direction: column;
+    gap: var(--space-12);
   }
   
-  .skills-grid,
+  .hero-name {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .hero-description {
+    font-size: var(--font-size-base);
+    line-height: 1.6;
+  }
+  
+  /* About Section */
+  .about-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: var(--space-24);
+  }
+  
+  .about-text {
+    order: 2;
+  }
+  
+  .about-image {
+    order: 1;
+  }
+  
+  /* Skills Section */
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-20);
+  }
+  
+  .skill-category {
+    padding: var(--space-20);
+  }
+  
+  /* Experience Section */
+  .timeline::before {
+    inset-inline-end: 20px;
+    transform: none;
+  }
+  
+  .timeline-item {
+    flex-direction: row;
+  }
+  
+  .timeline-item .timeline-content {
+    margin-inline-end: var(--space-24);
+    text-align: end;
+    margin-inline-start: 0;
+  }
+  
+  /* Projects Section */
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-20);
+  }
+  
+  .projects-filter {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-12);
+  }
+  
+  /* Services Section */
   .services-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-20);
+  }
+  
+  .service-card {
+    padding: var(--space-20);
+  }
+  
+  /* Contact Section */
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-24);
   }
   
   .form-row {
     grid-template-columns: 1fr;
   }
   
+  /* Footer */
   .footer-content {
     grid-template-columns: 1fr;
     text-align: center;
+    gap: var(--space-24);
   }
   
+  /* Typography */
   .section-title {
     font-size: var(--font-size-3xl);
+  }
+  
+  .section-subtitle {
+    font-size: var(--font-size-lg);
+  }
+  
+  /* Container */
+  .container {
+    padding-inline-start: var(--space-16);
+    padding-inline-end: var(--space-16);
+  }
+}
+
+@media (max-width: 600px) {
+  /* Hero Section */
+  .hero-stats {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-12);
   }
   
   .hero-name {
     font-size: var(--font-size-3xl);
   }
+  
+  /* Navigation */
+  .nav-container {
+    padding: var(--space-12) var(--space-16);
+  }
+  
+  /* Sections */
+  .section-title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  /* Skills */
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
+  }
+  
+  /* Projects */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Services */
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Contact */
+  .contact-content {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 480px) {
+  /* Container */
   .container {
-    padding-inline-start: var(--space-16);
-    padding-inline-end: var(--space-16);
+    padding-inline-start: var(--space-12);
+    padding-inline-end: var(--space-12);
   }
   
+  /* Hero Section */
   .hero-stats {
     grid-template-columns: 1fr;
+    gap: var(--space-12);
   }
   
+  .hero-name {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .hero-description {
+    font-size: var(--font-size-sm);
+  }
+  
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  /* Navigation */
+  .nav-container {
+    padding: var(--space-12) var(--space-16);
+  }
+  
+  .brand-logo span {
+    font-size: var(--font-size-lg);
+  }
+  
+  /* Sections */
+  .section-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .section-subtitle {
+    font-size: var(--font-size-base);
+  }
+  
+  /* Skills */
+  .skill-category {
+    padding: var(--space-16);
+  }
+  
+  .skill-category h3 {
+    font-size: var(--font-size-lg);
+  }
+  
+  /* Projects */
   .projects-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-16);
   }
   
   .projects-filter {
     flex-direction: column;
     align-items: center;
+    gap: var(--space-8);
   }
   
+  .filter-btn {
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Services */
+  .service-card {
+    padding: var(--space-16);
+  }
+  
+  .service-icon {
+    inline-size: 60px;
+    block-size: 60px;
+  }
+  
+  .service-icon i {
+    font-size: var(--font-size-xl);
+  }
+  
+  /* Contact */
+  .contact-info,
+  .contact-form-container {
+    padding: var(--space-16);
+  }
+  
+  .contact-item {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--space-8);
+  }
+  
+  .contact-icon {
+    inline-size: 40px;
+    block-size: 40px;
+  }
+  
+  /* Footer */
+  .footer-content {
+    gap: var(--space-16);
+  }
+  
+  .footer-brand .brand-logo {
+    font-size: var(--font-size-lg);
+  }
+  
+  /* Timeline */
+  .timeline-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .timeline-item .timeline-content {
+    margin-inline-end: 0;
+    margin-inline-start: 0;
+  }
+  
+  .timeline-date {
+    margin-block-end: var(--space-12);
+  }
+  
+  /* Carousel */
   .carousel-controls {
     flex-direction: column;
     gap: var(--space-12);
   }
+  
+  /* Modal */
+  .modal-content {
+    max-inline-size: 95vw;
+    margin: var(--space-16);
+  }
+  
+  /* Toast */
+  .toast-container {
+    inset-inline-start: var(--space-12);
+    inset-inline-end: var(--space-12);
+  }
+  
+  .toast {
+    max-inline-size: 100%;
+  }
+}
+
+/* Additional RTL fixes */
+.container {
+  direction: rtl;
+}
+
+.about-content,
+.contact-content {
+  direction: rtl;
+  text-align: center;
+}
+
+.footer-content {
+  direction: rtl;
+  text-align: right;
+}
+
+.about-text,
+.about-intro,
+.about-info {
+  direction: rtl;
+  text-align: center;
+}
+
+.info-item {
+  direction: rtl;
+  text-align: right;
+}
+
+.timeline-content {
+  direction: rtl;
+  text-align: center;
+}
+
+.timeline-content h3,
+.timeline-content h4,
+.timeline-content p {
+  direction: rtl;
+  text-align: right;
+}
+
+.project-content {
+  direction: rtl;
+  text-align: center;
+}
+
+.project-title,
+.project-description,
+.project-category {
+  direction: rtl;
+  text-align: right;
+}
+
+.service-title,
+.service-description {
+  direction: rtl;
+  text-align: center;
+}
+
+.service-features {
+  direction: rtl;
+  text-align: right;
+}
+
+.contact-info {
+  direction: rtl;
+  text-align: center;
+}
+
+.contact-details,
+.contact-details h4,
+.contact-details p {
+  direction: rtl;
+  text-align: right;
+}
+
+.footer-brand,
+.footer-links,
+.footer-contact {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Ensure all Arabic text is properly aligned */
+[lang="ar"],
+.arabic-text {
+  direction: rtl;
+  text-align: right;
+  unicode-bidi: embed;
+}
+
+/* Fix for specific problematic elements */
+.nav-menu,
+.nav-link,
+.brand-logo,
+.section-tag,
+.section-title,
+.section-subtitle,
+.about-intro {
+  direction: rtl !important;
+  text-align: center !important;
+}
+
+.hero-greeting,
+.hero-name,
+.hero-title,
+.hero-description {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+.timeline-content,
+.project-title,
+.project-description,
+.service-title,
+.service-description,
+.contact-details h4,
+.contact-details p,
+.footer-brand p,
+.footer-links a,
+.footer-contact-item {
+  direction: rtl !important;
+  text-align: right !important;
 }

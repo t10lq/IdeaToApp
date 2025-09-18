@@ -1,7 +1,7 @@
 // Ahmed Ibrahim Portfolio - Modern JavaScript Application
 // Professional Portfolio with Arabic RTL Support - FIXED Navigation
 
-class AhmedPortfolio {
+class OsamaPortfolio {
     constructor() {
         this.data = {
             projects: [
@@ -58,7 +58,7 @@ class AhmedPortfolio {
     }
 
     init() {
-        console.log('🚀 Initializing Ahmed Portfolio...');
+        console.log('🚀 Initializing Osama Portfolio...');
         
         // Wait for DOM to be fully ready
         if (document.readyState === 'loading') {
@@ -81,8 +81,7 @@ class AhmedPortfolio {
         this.setupContactForm();
         this.setupMobileMenu();
         
-        
-        console.log('✅ Ahmed Portfolio initialized successfully');
+        console.log('✅ Osama Portfolio initialized successfully');
     }
 
     // Loading Screen
@@ -168,15 +167,15 @@ class AhmedPortfolio {
                     const sectionTop = section.offsetTop - navHeight - 20; // Extra padding
                     
                     console.log('📏 Scroll calculation:', {
-                        sectioninset-block-start: section.offsetTop,
+                        sectionTop: section.offsetTop,
                         navHeight,
-                        finalinset-block-start: sectionTop
+                        finalTop: sectionTop
                     });
                     
                     // Smooth scroll with fallback
                     try {
                         window.scrollTo({
-                            inset-block-start: Math.max(0, sectionTop),
+                            top: Math.max(0, sectionTop),
                             behavior: 'smooth'
                         });
                         
@@ -446,9 +445,9 @@ class AhmedPortfolio {
         modalBody.innerHTML = `
             <div style="padding: 2rem;">
                 <img src="${project.image}" alt="${project.title}" 
-                     style="inline-size: 100%; block-size: 300px; object-fit: cover; border-radius: 8px; margin-block-end: 1.5rem;">
+                     style="width: 100%; height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 1.5rem;">
                 
-                <div style="margin-block-end: 1rem;">
+                <div style="margin-bottom: 1rem;">
                     <span style="background: var(--glass-bg); padding: 0.25rem 0.75rem; border-radius: 20px; 
                                 font-size: 0.875rem; color: var(--portfolio-primary);">
                         ${project.category}
@@ -456,16 +455,16 @@ class AhmedPortfolio {
                     ${project.status ? `<span class="status-badge status-badge--danger">${project.status}</span>` : ''}
                 </div>
                 
-                <h2 style="color: var(--color-text); margin-block-end: 1rem; font-size: 1.75rem;">
+                <h2 style="color: var(--color-text); margin-bottom: 1rem; font-size: 1.75rem;">
                     ${project.title}
                 </h2>
                 
-                <p style="color: var(--color-text-secondary); line-height: 1.6; margin-block-end: 1.5rem;">
+                <p style="color: var(--color-text-secondary); line-height: 1.6; margin-bottom: 1.5rem;">
                     ${project.description}
                 </p>
                 
-                <div style="margin-block-end: 1.5rem;">
-                    <h4 style="color: var(--color-text); margin-block-end: 0.75rem;">التقنيات المستخدمة:</h4>
+                <div style="margin-bottom: 1.5rem;">
+                    <h4 style="color: var(--color-text); margin-bottom: 0.75rem;">التقنيات المستخدمة:</h4>
                     <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                         ${project.tech.map(tech => `
                             <span style="background: var(--gradient-primary); color: white; 
@@ -476,29 +475,29 @@ class AhmedPortfolio {
                     </div>
                 </div>
                 
-                <div style="margin-block-end: 1.5rem;">
-                    <h4 style="color: var(--color-text); margin-block-end: 0.75rem;">الميزات الرئيسية:</h4>
-                    <ul style="color: var(--color-text-secondary); line-height: 1.6; padding-inline-end: 1.25rem;">
-                        ${project.features.map(feature => `<li style="margin-block-end: 0.5rem;">${feature}</li>`).join('')}
+                <div style="margin-bottom: 1.5rem;">
+                    <h4 style="color: var(--color-text); margin-bottom: 0.75rem;">الميزات الرئيسية:</h4>
+                    <ul style="color: var(--color-text-secondary); line-height: 1.6; padding-right: 1.25rem;">
+                        ${project.features.map(feature => `<li style="margin-bottom: 0.5rem;">${feature}</li>`).join('')}
                     </ul>
                 </div>
                 
-                <div style="margin-block-end: 1.5rem;">
-                    <h4 style="color: var(--color-text); margin-block-end: 0.75rem;">التحديات:</h4>
+                <div style="margin-bottom: 1.5rem;">
+                    <h4 style="color: var(--color-text); margin-bottom: 0.75rem;">التحديات:</h4>
                     <p style="color: var(--color-text-secondary); line-height: 1.6;">
                         ${project.challenges}
                     </p>
                 </div>
                 
                 <div>
-                    <h4 style="color: var(--color-text); margin-block-end: 0.75rem;">النتائج:</h4>
+                    <h4 style="color: var(--color-text); margin-bottom: 0.75rem;">النتائج:</h4>
                     <p style="color: var(--color-text-secondary); line-height: 1.6;">
                         ${project.results}
                     </p>
                 </div>
                 
                 ${project.link ? `
-                <div style="margin-block-start: 2rem; display: flex; gap: 0.75rem;">
+                <div style="margin-top: 2rem; display: flex; gap: 0.75rem;">
                     <a href="${project.link}" target="_blank" rel="noopener" 
                        style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--portfolio-primary); color: white; padding: 0.75rem 1rem; border-radius: 8px; text-decoration: none;">
                         <i class="fas fa-external-link-alt"></i>
@@ -525,7 +524,6 @@ class AhmedPortfolio {
         }
     }
 
-
     // Contact Form
     setupContactForm() {
         const form = document.getElementById('contactForm');
@@ -535,8 +533,6 @@ class AhmedPortfolio {
         }
         
         console.log('✅ Contact form found, setting up...');
-        
-        // Using direct mailto method for maximum reliability
         
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -569,7 +565,6 @@ class AhmedPortfolio {
         
         console.log('✅ Contact form setup complete');
     }
-
 
     validateField(field) {
         const value = field.value.trim();
@@ -626,7 +621,6 @@ class AhmedPortfolio {
         }
     }
 
-
     async handleFormSubmission(form) {
         console.log('📧 Handling form submission...');
         
@@ -652,14 +646,14 @@ class AhmedPortfolio {
             if (typeof emailjs !== 'undefined') {
                 console.log('📧 Attempting EmailJS send...');
                 const result = await emailjs.send(
-                    'service_2qpq3wr',
-                    'template_6qso35c',
+                    'service_7hjdj49',
+                    'template_uw7yup8',
                     {
                         from_name: data.name,
                         from_email: data.email,
                         subject: data.subject,
                         message: data.message,
-                        to_email: 'zaiddzaid666@gmail.com'
+                        to_email: 'osama.webtech.me@gmail.com'
                     }
                 );
                 
@@ -737,51 +731,24 @@ class AhmedPortfolio {
         }
     }
 
-    // Global function to manually restore button (for debugging)
-    window.restoreSubmitButton = function() {
-        console.log('🔧 Manual button restoration...');
-        const submitBtn = document.querySelector('button[type="submit"]');
-        if (submitBtn) {
-            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
-            submitBtn.disabled = false;
-            console.log('✅ Button manually restored');
-        }
-    };
-    
-    // Emergency button restore function
-    window.emergencyRestore = function() {
-        console.log('🚨 Emergency button restoration...');
-        const submitBtn = document.querySelector('button[type="submit"]');
-        if (submitBtn) {
-            // Force restore
-            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
-            submitBtn.disabled = false;
-            submitBtn.style.display = 'none';
-            submitBtn.offsetHeight;
-            submitBtn.style.display = '';
-            console.log('✅ Emergency restore completed');
-        }
-    };
-
-
     showContactInfo(data) {
         // Show contact information as fallback
         const contactInfo = `
             <div style="text-align: center; padding: 20px;">
-                <h3 style="color: var(--portfolio-primary); margin-block-end: 15px;">معلومات التواصل</h3>
-                <p style="margin-block-end: 10px;"><strong>البريد الإلكتروني:</strong> zaiddzaid666@gmail.com</p>
-                <p style="margin-block-end: 10px;"><strong>الهاتف:</strong> 078********</p>
-                <p style="margin-block-end: 20px;"><strong>الموقع:</strong> العراق، صلاح الدين</p>
+                <h3 style="color: var(--portfolio-primary); margin-bottom: 15px;">معلومات التواصل</h3>
+                <p style="margin-bottom: 10px;"><strong>البريد الإلكتروني:</strong> osama.webtech.me@gmail.com</p>
+                <p style="margin-bottom: 10px;"><strong>الهاتف:</strong> 078********</p>
+                <p style="margin-bottom: 20px;"><strong>الموقع:</strong> العراق، صلاح الدين</p>
                 
                 <div style="background: var(--glass-bg); padding: 15px; border-radius: 8px; margin: 15px 0;">
-                    <h4 style="color: var(--color-text); margin-block-end: 10px;">تفاصيل رسالتك:</h4>
+                    <h4 style="color: var(--color-text); margin-bottom: 10px;">تفاصيل رسالتك:</h4>
                     <p><strong>الاسم:</strong> ${data.name}</p>
                     <p><strong>البريد:</strong> ${data.email}</p>
                     <p><strong>الموضوع:</strong> ${data.subject}</p>
                     <p><strong>الرسالة:</strong> ${data.message}</p>
                 </div>
                 
-                <p style="color: var(--color-text-secondary); font-size: 14px; margin-block-end: 15px;">
+                <p style="color: var(--color-text-secondary); font-size: 14px; margin-bottom: 15px;">
                     يرجى نسخ هذه المعلومات وإرسالها عبر البريد الإلكتروني أو الهاتف
                 </p>
                 
@@ -796,7 +763,7 @@ class AhmedPortfolio {
         modal.className = 'modal';
         modal.innerHTML = `
             <div class="modal-overlay" onclick="this.parentElement.remove()"></div>
-            <div class="modal-content" style="max-inline-size: 500px;">
+            <div class="modal-content" style="max-width: 500px;">
                 <button class="modal-close" onclick="this.closest('.modal').remove()">
                     <i class="fas fa-times"></i>
                 </button>
@@ -809,7 +776,6 @@ class AhmedPortfolio {
         document.body.appendChild(modal);
         modal.classList.remove('hidden');
     }
-
 
     // Mobile Menu
     setupMobileMenu() {
@@ -874,8 +840,33 @@ class AhmedPortfolio {
             }
         }, 4000);
     }
-
 }
+
+// Global function to manually restore button (for debugging)
+window.restoreSubmitButton = function() {
+    console.log('🔧 Manual button restoration...');
+    const submitBtn = document.querySelector('button[type="submit"]');
+    if (submitBtn) {
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
+        submitBtn.disabled = false;
+        console.log('✅ Button manually restored');
+    }
+};
+
+// Emergency button restore function
+window.emergencyRestore = function() {
+    console.log('🚨 Emergency button restoration...');
+    const submitBtn = document.querySelector('button[type="submit"]');
+    if (submitBtn) {
+        // Force restore
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
+        submitBtn.disabled = false;
+        submitBtn.style.display = 'none';
+        submitBtn.offsetHeight;
+        submitBtn.style.display = '';
+        console.log('✅ Emergency restore completed');
+    }
+};
 
 // Global functions for HTML onclick handlers
 function openProjectModal(index) {
@@ -893,7 +884,7 @@ function closeProjectModal() {
 function copyContactInfo() {
     const contactText = `
 معلومات التواصل:
-البريد الإلكتروني: zaiddzaid666@gmail.com
+البريد الإلكتروني: osama.webtech.me@gmail.com
 الهاتف: 078********
 الموقع: العراق، صلاح الدين
 
@@ -988,11 +979,10 @@ function testButtonRestoration() {
     }, 2000);
 }
 
-
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     console.log('🌟 DOM loaded - initializing portfolio...');
-    window.portfolio = new AhmedPortfolio();
+    window.portfolio = new OsamaPortfolio();
     
     // Make functions globally available
     window.openProjectModal = openProjectModal;
@@ -1007,14 +997,14 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('load', () => {
     if (!window.portfolio) {
         console.log('🔄 Backup initialization...');
-        window.portfolio = new AhmedPortfolio();
+        window.portfolio = new OsamaPortfolio();
         window.openProjectModal = openProjectModal;
         window.closeProjectModal = closeProjectModal;
     }
 });
 
-console.log('🚀 Ahmed Ibrahim Portfolio - Professional Web Developer & UI/UX Designer - Navigation Fixed!');/ /   F o r c e   c a c h e   b u s t   -   0 9 / 1 6 / 2 0 2 5   1 4 : 3 4 : 1 6 
- 
- / /   T e s t i n g   b u t t o n   r e s t o r a t i o n   -   0 9 / 1 6 / 2 0 2 5   1 4 : 4 7 : 1 2 
- 
- 
+console.log('🚀 Osama zaid Portfolio - Professional Web Developer & UI/UX Designer - Navigation Fixed!');
+
+// Force cache bust - 09/16/2025 14:34:16
+
+// Testing button restoration - 09/16/2025 14:47:12
